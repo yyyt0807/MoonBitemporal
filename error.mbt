@@ -17,6 +17,7 @@ pub(all) suberror TemporalError {
   TooManyKeys(maximum~ : Int)
   InvalidPage(String)
   DivergentHistory(index~ : Int)
+  TooManyCells(maximum~ : Int)
 }
 
 ///|
@@ -38,5 +39,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     TooManyKeys(..) => "TEMPORAL_KEY_LIMIT"
     InvalidPage(_) => "TEMPORAL_INVALID_PAGE"
     DivergentHistory(..) => "TEMPORAL_DIVERGENT_HISTORY"
+    TooManyCells(..) => "TEMPORAL_CELL_LIMIT"
   }
 }
