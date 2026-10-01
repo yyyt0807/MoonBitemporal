@@ -59,7 +59,7 @@ moon run examples/calibration --target wasm-gc
 moon run examples/rollout --target wasm-gc
 ```
 
-The examples demonstrate invoice replay after a price correction, incident-time access review, corrected telemetry metadata and rule-rollout comparison. They contain assertions and print short verification summaries. CI runs the same build and test gates on Ubuntu and Windows. Four backends are checked and tested: Wasm, Wasm-GC, JavaScript and Native.
+The examples demonstrate invoice replay after a price correction, incident-time access review, corrected telemetry metadata and rule-rollout comparison. They contain assertions and print short verification summaries. CI is configured to run the same build and test gates on Ubuntu and Windows after the repository is pushed. Four backends are checked and tested locally: Wasm, Wasm-GC, JavaScript and Native.
 
 ## Boundaries and limitations
 
