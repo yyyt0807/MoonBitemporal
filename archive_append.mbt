@@ -6,28 +6,33 @@ pub fn Ledger::append_ledger(
   self : Ledger,
   incoming : Ledger,
 ) -> Ledger raise TemporalError {
-  let mut result = self
-  let mut pending : Array[Change] = []
-  let mut pending_time : Int64? = None
-  for revision in incoming.revisions {
-    match pending_time {
-      Some(at) if at != revision.known_at => {
-        result = result.commit(at, pending)
-        pending = []
-        pending_time = Some(revision.known_at)
-      }
-      None => pending_time = Some(revision.known_at)
-      _ => ()
-    }
-    pending.push({
-      key: revision.key,
-      valid: revision.valid,
-      value: revision.value,
+  if incoming.revisions.is_empty() {
+    return self
+  }
+  let first_incoming = incoming.revisions[0].known_at
+  match self.latest_time {
+    Some(previous) if first_incoming <= previous =>
+      raise KnowledgeTimeNotIncreasing(previous~, proposed=first_incoming)
+    _ => ()
+  }
+  if incoming.revisions.length() > self.maximum - self.revisions.length() {
+    raise TooManyRevisions(maximum=self.maximum)
+  }
+  let revisions = self.revisions.copy()
+  for item in incoming.revisions {
+    revisions.push({
+      key: item.key,
+      valid: item.valid,
+      known_at: item.known_at,
+      value: item.value,
+      sequence: revisions.length(),
     })
   }
-  match pending_time {
-    Some(at) => result.commit(at, pending)
-    None => result
+  {
+    revisions,
+    index: build_index(revisions),
+    latest_time: incoming.latest_time,
+    maximum: self.maximum,
   }
 }
 

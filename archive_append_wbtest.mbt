@@ -36,3 +36,26 @@ test "empty archive tail is an identity operation" {
   let merged = try! first.append_json(empty)
   assert_eq(merged.to_json_string(), first.to_json_string())
 }
+
+///|
+test "bulk tail append preserves a long sequence without repeated commits" {
+  let base = try! Ledger::new(maximum=2000)
+  let first = try! base.commit(
+    0L,
+    [Change::put("anchor", Span::open(0L), "base")],
+  )
+  let mut remote = try! Ledger::new(maximum=2000)
+  for i = 1; i <= 500; i = i + 1 {
+    remote = remote.commit(
+      i.to_int64(),
+      [Change::put("sensor", Span::open(0L), i.to_string())],
+    )
+  }
+  let merged = try! first.append_ledger(remote)
+  assert_eq(merged.revision_count(), 501)
+  assert_eq(merged.revision(1).unwrap().sequence(), 1)
+  assert_eq(merged.revision(500).unwrap().sequence(), 500)
+  assert_eq(merged.get("anchor", 0L, 500L), Some("base"))
+  assert_eq(merged.get("sensor", 0L, 500L), Some("500"))
+  assert_eq(first.revision_count(), 1)
+}
