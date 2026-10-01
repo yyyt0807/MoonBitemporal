@@ -61,16 +61,7 @@ pub fn Ledger::commit(
   if changes.length() > self.maximum - self.revisions.length() {
     raise TooManyRevisions(maximum=self.maximum)
   }
-  for i, change in changes {
-    if change.key == "" {
-      raise EmptyKey
-    }
-    for j = 0; j < i; j = j + 1 {
-      if change.key == changes[j].key && change.valid.overlaps(changes[j].valid) {
-        raise OverlappingBatchChanges(key=change.key, first=j, second=i)
-      }
-    }
-  }
+  validate_batch_changes(changes)
   let revisions = self.revisions.copy()
   for change in changes {
     revisions.push({
