@@ -1,0 +1,35 @@
+name: MoonBit CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: hustcer/setup-moonbit@v1.23
+      - name: Toolchain
+        run: moon version --all
+      - name: Formatting
+        run: moon fmt --check
+      - name: Check all backends
+        run: moon check --target all --deny-warn
+      - name: Build all backends
+        run: moon build --target all --deny-warn
+      - name: Test all backends
+        run: moon test --target all --deny-warn
+      - name: Pricing example
+        run: moon run examples/pricing --target wasm-gc
+      - name: Access example
+        run: moon run examples/access --target wasm-gc
+      - name: Calibration example
+        run: moon run examples/calibration --target wasm-gc
