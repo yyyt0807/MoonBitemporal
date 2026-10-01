@@ -14,6 +14,7 @@ pub(all) suberror TemporalError {
   DuplicateArchiveKey
   UnboundedDuration
   DurationOverflow
+  TooManyKeys(maximum~ : Int)
 }
 
 ///|
@@ -32,5 +33,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     DuplicateArchiveKey => "TEMPORAL_DUPLICATE_ARCHIVE_KEY"
     UnboundedDuration => "TEMPORAL_UNBOUNDED_DURATION"
     DurationOverflow => "TEMPORAL_DURATION_OVERFLOW"
+    TooManyKeys(..) => "TEMPORAL_KEY_LIMIT"
   }
 }
