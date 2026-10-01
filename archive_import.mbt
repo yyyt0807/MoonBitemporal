@@ -90,25 +90,45 @@ pub fn Ledger::from_json(
     Some(Array(items)) => items
     _ => raise InvalidArchive("revisions must be an array")
   }
-  let mut ledger = Ledger::new(maximum~)
+  ignore(Ledger::new(maximum~))
+  if items.length() > maximum {
+    raise TooManyRevisions(maximum~)
+  }
+  let revisions : Array[Revision] = []
   let mut pending : Array[Change] = []
   let mut pending_time : Int64? = None
   for index, item in items {
     let (known_at, change) = archive_revision(item, index)
     match pending_time {
       Some(at) if at != known_at => {
-        ledger = ledger.commit(at, pending)
+        if known_at < at {
+          raise KnowledgeTimeNotIncreasing(previous=at, proposed=known_at)
+        }
+        validate_batch_changes(pending)
         pending = []
         pending_time = Some(known_at)
       }
       None => pending_time = Some(known_at)
       _ => ()
     }
+    revisions.push({
+      key: change.key,
+      valid: change.valid,
+      known_at,
+      value: change.value,
+      sequence: revisions.length(),
+    })
     pending.push(change)
   }
   match pending_time {
-    Some(at) => ledger.commit(at, pending)
-    None => ledger
+    Some(_) => validate_batch_changes(pending)
+    None => ()
+  }
+  {
+    revisions,
+    index: build_index(revisions),
+    latest_time: pending_time,
+    maximum,
   }
 }
 
