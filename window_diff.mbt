@@ -64,6 +64,35 @@ pub fn Ledger::diff_timeline(
   }
   let before = self.timeline(key, bounds, before_known, max_segments~)
   let after = self.timeline(key, bounds, after_known, max_segments~)
+  merge_timeline_changes(before, after, max_segments)
+}
+
+///|
+/// Compare independent ledgers, such as a deployed archive and a candidate
+/// archive, without assuming they share a common append history.
+pub fn compare_ledgers(
+  before_ledger : Ledger,
+  after_ledger : Ledger,
+  key : String,
+  bounds : Span,
+  before_known : Int64,
+  after_known : Int64,
+  max_segments? : Int = 4096,
+) -> Array[WindowChange] raise TemporalError {
+  if max_segments <= 0 {
+    raise TooManySegments(maximum=max_segments)
+  }
+  let before = before_ledger.timeline(key, bounds, before_known, max_segments~)
+  let after = after_ledger.timeline(key, bounds, after_known, max_segments~)
+  merge_timeline_changes(before, after, max_segments)
+}
+
+///|
+fn merge_timeline_changes(
+  before : Array[Segment],
+  after : Array[Segment],
+  max_segments : Int,
+) -> Array[WindowChange] raise TemporalError {
   let output : Array[WindowChange] = []
   let mut left = 0
   let mut right = 0
