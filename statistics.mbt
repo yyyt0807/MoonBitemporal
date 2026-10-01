@@ -78,7 +78,7 @@ pub fn Ledger::stats(self : Ledger) -> LedgerStats {
     counts[revision.key] = count
     if count > most_revisions_for_key ||
       (count == most_revisions_for_key && (match most_revised_key {
-        Some(previous) => revision.key.compare(previous) < 0
+        Some(previous) => revision.key.lexical_compare(previous) < 0
         None => true
       })) {
       most_revisions_for_key = count

@@ -31,7 +31,7 @@ fn unique_query_keys(keys : Array[String], max_keys : Int) -> Array[String] rais
     raise TooManyKeys(maximum=max_keys)
   }
   let sorted = keys.copy()
-  sorted.sort_by(fn(a, b) { a.compare(b) })
+  sorted.sort_by(fn(a, b) { a.lexical_compare(b) })
   let unique : Array[String] = []
   for key in sorted {
     if unique.is_empty() || unique[unique.length() - 1] != key {

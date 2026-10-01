@@ -28,7 +28,7 @@ pub fn Ledger::keys(self : Ledger) -> Array[String] {
   for revision in self.revisions {
     values.push(revision.key)
   }
-  values.sort_by(fn(a, b) { a.compare(b) })
+  values.sort_by(fn(a, b) { a.lexical_compare(b) })
   let unique : Array[String] = []
   for key in values {
     if unique.is_empty() || unique[unique.length() - 1] != key {

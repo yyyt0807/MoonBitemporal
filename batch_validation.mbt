@@ -22,7 +22,7 @@ fn validate_batch_changes(changes : Array[Change]) -> Unit raise TemporalError {
     })
   }
   entries.sort_by(fn(a, b) {
-    let key_order = a.key.compare(b.key)
+    let key_order = a.key.lexical_compare(b.key)
     if key_order != 0 {
       key_order
     } else if a.valid.start < b.valid.start {

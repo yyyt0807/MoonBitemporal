@@ -88,6 +88,6 @@ pub fn Ledger::coverage(
   for value, duration in durations {
     values.push({ value, duration })
   }
-  values.sort_by(fn(a, b) { a.value.compare(b.value) })
+  values.sort_by(fn(a, b) { a.value.lexical_compare(b.value) })
   { total, assigned, withdrawn, unclaimed, values }
 }
