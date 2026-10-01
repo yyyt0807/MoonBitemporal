@@ -15,6 +15,7 @@ pub(all) suberror TemporalError {
   UnboundedDuration
   DurationOverflow
   TooManyKeys(maximum~ : Int)
+  InvalidPage(String)
 }
 
 ///|
@@ -34,5 +35,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     UnboundedDuration => "TEMPORAL_UNBOUNDED_DURATION"
     DurationOverflow => "TEMPORAL_DURATION_OVERFLOW"
     TooManyKeys(..) => "TEMPORAL_KEY_LIMIT"
+    InvalidPage(_) => "TEMPORAL_INVALID_PAGE"
   }
 }
