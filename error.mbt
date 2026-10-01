@@ -12,6 +12,8 @@ pub(all) suberror TemporalError {
   InvalidArchive(String)
   InvalidRevisionIndex(Int)
   DuplicateArchiveKey
+  UnboundedDuration
+  DurationOverflow
 }
 
 ///|
@@ -28,5 +30,7 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     InvalidArchive(_) => "TEMPORAL_INVALID_ARCHIVE"
     InvalidRevisionIndex(_) => "TEMPORAL_REVISION_INDEX"
     DuplicateArchiveKey => "TEMPORAL_DUPLICATE_ARCHIVE_KEY"
+    UnboundedDuration => "TEMPORAL_UNBOUNDED_DURATION"
+    DurationOverflow => "TEMPORAL_DURATION_OVERFLOW"
   }
 }
