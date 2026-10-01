@@ -10,6 +10,7 @@ pub(all) suberror TemporalError {
   TooManySegments(maximum~ : Int)
   InvalidInstant(String)
   InvalidArchive(String)
+  InvalidRevisionIndex(Int)
 }
 
 ///|
@@ -24,5 +25,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     TooManySegments(..) => "TEMPORAL_SEGMENT_LIMIT"
     InvalidInstant(_) => "TEMPORAL_INVALID_INSTANT"
     InvalidArchive(_) => "TEMPORAL_INVALID_ARCHIVE"
+    InvalidRevisionIndex(_) => "TEMPORAL_REVISION_INDEX"
   }
 }
