@@ -11,6 +11,7 @@ pub(all) suberror TemporalError {
   InvalidInstant(String)
   InvalidArchive(String)
   InvalidRevisionIndex(Int)
+  DuplicateArchiveKey
 }
 
 ///|
@@ -26,5 +27,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     InvalidInstant(_) => "TEMPORAL_INVALID_INSTANT"
     InvalidArchive(_) => "TEMPORAL_INVALID_ARCHIVE"
     InvalidRevisionIndex(_) => "TEMPORAL_REVISION_INDEX"
+    DuplicateArchiveKey => "TEMPORAL_DUPLICATE_ARCHIVE_KEY"
   }
 }

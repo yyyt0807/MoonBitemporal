@@ -122,6 +122,7 @@ pub fn Ledger::from_json_string(
   if max_chars <= 0 || text.length() > max_chars {
     raise InvalidArchive("archive exceeds character limit")
   }
+  reject_duplicate_json_keys(text)
   let value = @json.parse(text) catch {
     _ => raise InvalidArchive("invalid JSON syntax")
   }
