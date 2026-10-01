@@ -16,6 +16,7 @@ pub(all) suberror TemporalError {
   DurationOverflow
   TooManyKeys(maximum~ : Int)
   InvalidPage(String)
+  DivergentHistory(index~ : Int)
 }
 
 ///|
@@ -36,5 +37,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     DurationOverflow => "TEMPORAL_DURATION_OVERFLOW"
     TooManyKeys(..) => "TEMPORAL_KEY_LIMIT"
     InvalidPage(_) => "TEMPORAL_INVALID_PAGE"
+    DivergentHistory(..) => "TEMPORAL_DIVERGENT_HISTORY"
   }
 }
