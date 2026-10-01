@@ -48,9 +48,10 @@ fn before_revision(
 ) -> Revision? {
   match ledger.index.get(key) {
     Some(positions) => {
-      for i = positions.length() - 1; i >= 0; i = i - 1 {
+      let eligible = key_upper_bound(ledger.revisions, positions, known_at, false)
+      for i = eligible - 1; i >= 0; i = i - 1 {
         let item = ledger.revisions[positions[i]]
-        if item.known_at < known_at && item.valid.contains(valid_at) {
+        if item.valid.contains(valid_at) {
           return Some(item)
         }
       }

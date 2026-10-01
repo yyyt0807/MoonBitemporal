@@ -29,6 +29,28 @@ fn build_index(revisions : Array[Revision]) -> Map[String, Array[Int]] {
 }
 
 ///|
+/// Position after the last revision eligible for a knowledge-time query.
+fn key_upper_bound(
+  revisions : Array[Revision],
+  positions : Array[Int],
+  known_at : Int64,
+  inclusive : Bool,
+) -> Int {
+  let mut low = 0
+  let mut high = positions.length()
+  while low < high {
+    let middle = low + (high - low) / 2
+    let candidate = revisions[positions[middle]].known_at
+    if candidate < known_at || (inclusive && candidate == known_at) {
+      low = middle + 1
+    } else {
+      high = middle
+    }
+  }
+  low
+}
+
+///|
 pub fn Ledger::revision_count(self : Ledger) -> Int {
   self.revisions.length()
 }
@@ -90,9 +112,10 @@ pub fn Ledger::observe(
 ) -> Revision? {
   match self.index.get(key) {
     Some(positions) => {
-      for i = positions.length() - 1; i >= 0; i = i - 1 {
+      let eligible = key_upper_bound(self.revisions, positions, known_at, true)
+      for i = eligible - 1; i >= 0; i = i - 1 {
         let revision = self.revisions[positions[i]]
-        if revision.known_at <= known_at && revision.valid.contains(valid_at) {
+        if revision.valid.contains(valid_at) {
           return Some(revision)
         }
       }
