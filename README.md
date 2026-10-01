@@ -41,7 +41,7 @@ assert_eq(revised.get("sku/coffee", 50L, 20L), Some("USD 10"))
 
 `to_json_string` and `from_json_string` exchange a versioned archive. All `Int64` instants are decimal **strings**, so JavaScript consumers do not round values above 2^53. Text import limits input length, nesting and node count, rejects duplicate object members (including escaped equivalent spellings), validates every batch, and enforces a revision ceiling. `from_json(Json)` accepts an already parsed value, so duplicate keys cannot be detected at that entry point. `to_json_since` and `append_json` transfer a chronological tail; `reconcile` compares full archives and rejects a divergent shared prefix. Archive transport, authentication, durable transactions and replay authorization are the caller's responsibility.
 
-The library's source and formats are documented in [architecture](docs/ARCHITECTURE.md), [API and archive contract](docs/API.md), [performance](docs/PERFORMANCE.md), [testing](docs/TESTING.md) and [security boundaries](docs/SECURITY.md).
+The library's source and formats are documented in [architecture](docs/ARCHITECTURE.md), [API and archive contract](docs/API.md), [performance](docs/PERFORMANCE.md), [benchmark evidence](docs/BENCHMARK.md), [testing](docs/TESTING.md) and [security boundaries](docs/SECURITY.md).
 
 ## Run from source
 
@@ -57,6 +57,7 @@ moon run examples/pricing --target wasm-gc
 moon run examples/access --target wasm-gc
 moon run examples/calibration --target wasm-gc
 moon run examples/rollout --target wasm-gc
+moon run benchmarks/main --target native --release
 ```
 
 The examples demonstrate invoice replay after a price correction, incident-time access review, corrected telemetry metadata and rule-rollout comparison. They contain assertions and print short verification summaries. CI is configured to run the same build and test gates on Ubuntu and Windows after the repository is pushed. Four backends are checked and tested locally: Wasm, Wasm-GC, JavaScript and Native.
