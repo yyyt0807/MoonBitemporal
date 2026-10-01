@@ -23,6 +23,10 @@ jobs:
         run: moon fmt --check
       - name: Check all backends
         run: moon check --target all --deny-warn
+      - name: Public interface drift
+        run: |
+          moon info
+          git diff --exit-code
       - name: Build all backends
         run: moon build --target all --deny-warn
       - name: Test all backends
@@ -33,3 +37,5 @@ jobs:
         run: moon run examples/access --target wasm-gc
       - name: Calibration example
         run: moon run examples/calibration --target wasm-gc
+      - name: Rollout example
+        run: moon run examples/rollout --target wasm-gc

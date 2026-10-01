@@ -1,0 +1,372 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "oyjh0381/moonbitemporal"
+
+// Values
+pub fn compare_all_keys(Ledger, Ledger, Span, Int64, Int64, max_keys? : Int, max_fragments? : Int) -> ChangeReport raise TemporalError
+
+pub fn compare_ledgers(Ledger, Ledger, String, Span, Int64, Int64, max_segments? : Int) -> Array[WindowChange] raise TemporalError
+
+pub fn format_instant(Int64) -> String
+
+pub fn gaps(Array[Span], Span) -> Array[Span]
+
+pub fn normalize_spans(Array[Span], Span) -> Array[Span]
+
+pub fn parse_instant(String) -> Int64 raise TemporalError
+
+// Errors
+pub(all) suberror TemporalError {
+  InvalidSpan(String)
+  EmptyKey
+  EmptyBatch
+  KnowledgeTimeNotIncreasing(previous~ : Int64, proposed~ : Int64)
+  OverlappingBatchChanges(key~ : String, first~ : Int, second~ : Int)
+  TooManyRevisions(maximum~ : Int)
+  TooManySegments(maximum~ : Int)
+  InvalidInstant(String)
+  InvalidArchive(String)
+  InvalidRevisionIndex(Int)
+  DuplicateArchiveKey
+  UnboundedDuration
+  DurationOverflow
+  TooManyKeys(maximum~ : Int)
+  InvalidPage(String)
+  DivergentHistory(index~ : Int)
+  TooManyCells(maximum~ : Int)
+}
+pub fn TemporalError::code(Self) -> String
+
+// Types and methods
+pub struct Change {
+  key : String
+  valid : Span
+  value : String?
+}
+pub fn Change::delete(String, Span) -> Self
+pub fn Change::key(Self) -> String
+pub fn Change::put(String, Span, String) -> Self
+pub fn Change::valid(Self) -> Span
+pub fn Change::value(Self) -> String?
+
+pub struct ChangeReport {
+  entries : Array[KeyChangeReport]
+  keys_examined : Int
+  fragments : Int
+  bounds : Span
+  before_known : Int64
+  after_known : Int64
+}
+pub fn ChangeReport::after_known(Self) -> Int64
+pub fn ChangeReport::before_known(Self) -> Int64
+pub fn ChangeReport::bounds(Self) -> Span
+pub fn ChangeReport::entries(Self) -> Array[KeyChangeReport]
+pub fn ChangeReport::fragment_count(Self) -> Int
+pub fn ChangeReport::is_empty(Self) -> Bool
+pub fn ChangeReport::keys_changed(Self) -> Int
+pub fn ChangeReport::keys_examined(Self) -> Int
+pub fn ChangeReport::to_json(Self) -> Json
+pub fn ChangeReport::to_json_string(Self) -> String
+
+pub struct CommitReport {
+  next : Ledger
+  impacts : Array[Impact]
+  known_at : Int64
+  appended : Int
+}
+pub fn CommitReport::appended(Self) -> Int
+pub fn CommitReport::changed_fragment_count(Self) -> Int
+pub fn CommitReport::impacts(Self) -> Array[Impact]
+pub fn CommitReport::known_at(Self) -> Int64
+pub fn CommitReport::next(Self) -> Ledger
+
+pub struct Coverage {
+  total : Int64
+  assigned : Int64
+  withdrawn : Int64
+  unclaimed : Int64
+  values : Array[ValueDuration]
+}
+pub fn Coverage::assigned(Self) -> Int64
+pub fn Coverage::total(Self) -> Int64
+pub fn Coverage::unclaimed(Self) -> Int64
+pub fn Coverage::values(Self) -> Array[ValueDuration]
+pub fn Coverage::withdrawn(Self) -> Int64
+
+pub struct DecisionTrace {
+  key : String
+  valid_at : Int64
+  known_at : Int64
+  candidates : Array[Revision]
+  truncated : Bool
+}
+pub fn DecisionTrace::candidates(Self) -> Array[Revision]
+pub fn DecisionTrace::key(Self) -> String
+pub fn DecisionTrace::known_at(Self) -> Int64
+pub fn DecisionTrace::superseded_count(Self) -> Int
+pub fn DecisionTrace::truncated(Self) -> Bool
+pub fn DecisionTrace::valid_at(Self) -> Int64
+pub fn DecisionTrace::value(Self) -> String?
+pub fn DecisionTrace::winner(Self) -> Revision?
+
+pub struct Fact {
+  key : String
+  value : String
+  source : Revision
+}
+pub fn Fact::key(Self) -> String
+pub fn Fact::source(Self) -> Revision
+pub fn Fact::value(Self) -> String
+
+pub struct Impact {
+  key : String
+  valid : Span
+  before : String?
+  after : String?
+  previous_source : Revision?
+  revision : Revision
+}
+pub fn Impact::after(Self) -> String?
+pub fn Impact::before(Self) -> String?
+pub fn Impact::key(Self) -> String
+pub fn Impact::previous_source(Self) -> Revision?
+pub fn Impact::revision(Self) -> Revision
+pub fn Impact::valid(Self) -> Span
+
+pub struct KeyChangeReport {
+  key : String
+  fragments : Array[WindowChange]
+}
+pub fn KeyChangeReport::fragment_count(Self) -> Int
+pub fn KeyChangeReport::fragments(Self) -> Array[WindowChange]
+pub fn KeyChangeReport::key(Self) -> String
+pub fn KeyChangeReport::to_json(Self) -> Json
+
+pub struct KnowledgeSegment {
+  known : Span
+  source : Revision?
+}
+pub fn KnowledgeSegment::is_unclaimed(Self) -> Bool
+pub fn KnowledgeSegment::is_withdrawn(Self) -> Bool
+pub fn KnowledgeSegment::known(Self) -> Span
+pub fn KnowledgeSegment::source(Self) -> Revision?
+pub fn KnowledgeSegment::value(Self) -> String?
+
+pub struct Ledger {
+  revisions : Array[Revision]
+  index : Map[String, Array[Int]]
+  latest_time : Int64?
+  maximum : Int
+}
+pub fn Ledger::append_json(Self, Json) -> Self raise TemporalError
+pub fn Ledger::append_json_string(Self, String, max_chars? : Int) -> Self raise TemporalError
+pub fn Ledger::append_ledger(Self, Self) -> Self raise TemporalError
+pub fn Ledger::as_known_at(Self, Int64) -> Self
+pub fn Ledger::change_report(Self, Span, Int64, Int64, max_keys? : Int, max_fragments? : Int) -> ChangeReport raise TemporalError
+pub fn Ledger::commit(Self, Int64, Array[Change]) -> Self raise TemporalError
+pub fn Ledger::commit_with_report(Self, Int64, Array[Change], max_impacts? : Int) -> CommitReport raise TemporalError
+pub fn Ledger::contains_key(Self, String, Int64, Int64) -> Bool
+pub fn Ledger::coverage(Self, String, Span, Int64, max_segments? : Int) -> Coverage raise TemporalError
+pub fn Ledger::diff_knowledge(Self, Int64, Int64, Int64) -> Array[ValueChange]
+pub fn Ledger::diff_timeline(Self, String, Span, Int64, Int64, max_segments? : Int) -> Array[WindowChange] raise TemporalError
+pub fn Ledger::diff_valid(Self, Int64, Int64, Int64) -> Array[ValueChange]
+pub fn Ledger::first_divergence(Self, Self) -> Int?
+pub fn Ledger::from_json(Json, maximum? : Int) -> Self raise TemporalError
+pub fn Ledger::from_json_string(String, maximum? : Int, max_chars? : Int) -> Self raise TemporalError
+pub fn Ledger::get(Self, String, Int64, Int64) -> String?
+pub fn Ledger::history(Self, String) -> Array[Revision]
+pub fn Ledger::history_count(Self, String) -> Int
+pub fn Ledger::history_page(Self, String, Int, Int) -> RevisionPage raise TemporalError
+pub fn Ledger::impact_of_revision(Self, Int, max_segments? : Int) -> Array[Impact] raise TemporalError
+pub fn Ledger::is_prefix_of(Self, Self) -> Bool
+pub fn Ledger::keys(Self) -> Array[String]
+pub fn Ledger::knowledge_timeline(Self, String, Int64, Span, max_segments? : Int) -> Array[KnowledgeSegment] raise TemporalError
+pub fn Ledger::latest_time(Self) -> Int64?
+pub fn Ledger::matching_spans(Self, String, Span, Int64, SpanFilter, max_segments? : Int) -> Array[Span] raise TemporalError
+pub fn Ledger::new(maximum? : Int) -> Self raise TemporalError
+pub fn Ledger::observe(Self, String, Int64, Int64) -> Revision?
+pub fn Ledger::page(Self, Int, Int) -> RevisionPage raise TemporalError
+pub fn Ledger::reconcile(Self, Self) -> Self raise TemporalError
+pub fn Ledger::revision(Self, Int) -> Revision?
+pub fn Ledger::revision_count(Self) -> Int
+pub fn Ledger::sample_matrix(Self, String, Array[Int64], Array[Int64], max_cells? : Int) -> TemporalMatrix raise TemporalError
+pub fn Ledger::select_keys(Self, Array[String]) -> Self
+pub fn Ledger::snapshot(Self, Int64, Int64) -> Array[Fact]
+pub fn Ledger::snapshot_timeline(Self, Array[String], Span, Int64, max_keys? : Int, max_segments? : Int) -> Array[SnapshotSegment] raise TemporalError
+pub fn Ledger::stats(Self) -> LedgerStats
+pub fn Ledger::timeline(Self, String, Span, Int64, max_segments? : Int) -> Array[Segment] raise TemporalError
+pub fn Ledger::to_json(Self) -> Json
+pub fn Ledger::to_json_since(Self, Int64) -> Json
+pub fn Ledger::to_json_string(Self) -> String
+pub fn Ledger::trace(Self, String, Int64, Int64, max_candidates? : Int) -> DecisionTrace raise TemporalError
+pub fn Ledger::visible_count(Self, Int64, Int64) -> Int
+
+pub struct LedgerBuilder {
+  revisions : Array[Revision]
+  index : Map[String, Array[Int]]
+  mut latest_time : Int64?
+  maximum : Int
+  mut batches : Int
+}
+pub fn LedgerBuilder::append(Self, Int64, Array[Change]) -> Unit raise TemporalError
+pub fn LedgerBuilder::batch_count(Self) -> Int
+pub fn LedgerBuilder::freeze(Self) -> Ledger
+pub fn LedgerBuilder::from_ledger(Ledger) -> Self
+pub fn LedgerBuilder::get(Self, String, Int64, Int64) -> String?
+pub fn LedgerBuilder::latest_time(Self) -> Int64?
+pub fn LedgerBuilder::new(maximum? : Int) -> Self raise TemporalError
+pub fn LedgerBuilder::observe(Self, String, Int64, Int64) -> Revision?
+pub fn LedgerBuilder::remaining_capacity(Self) -> Int
+pub fn LedgerBuilder::revision_count(Self) -> Int
+
+pub struct LedgerStats {
+  revisions : Int
+  keys : Int
+  batches : Int
+  tombstones : Int
+  open_valid_spans : Int
+  most_revised_key : String?
+  most_revisions_for_key : Int
+  first_knowledge_time : Int64?
+  latest_knowledge_time : Int64?
+}
+pub fn LedgerStats::batches(Self) -> Int
+pub fn LedgerStats::first_knowledge_time(Self) -> Int64?
+pub fn LedgerStats::keys(Self) -> Int
+pub fn LedgerStats::latest_knowledge_time(Self) -> Int64?
+pub fn LedgerStats::most_revised_key(Self) -> String?
+pub fn LedgerStats::most_revisions_for_key(Self) -> Int
+pub fn LedgerStats::open_valid_spans(Self) -> Int
+pub fn LedgerStats::revisions(Self) -> Int
+pub fn LedgerStats::tombstones(Self) -> Int
+
+pub struct MatrixCell {
+  valid_at : Int64
+  known_at : Int64
+  source : Revision?
+}
+pub fn MatrixCell::is_unclaimed(Self) -> Bool
+pub fn MatrixCell::is_withdrawn(Self) -> Bool
+pub fn MatrixCell::known_at(Self) -> Int64
+pub fn MatrixCell::source(Self) -> Revision?
+pub fn MatrixCell::to_json(Self) -> Json
+pub fn MatrixCell::valid_at(Self) -> Int64
+pub fn MatrixCell::value(Self) -> String?
+
+pub struct Revision {
+  key : String
+  valid : Span
+  known_at : Int64
+  value : String?
+  sequence : Int
+}
+pub fn Revision::key(Self) -> String
+pub fn Revision::known_at(Self) -> Int64
+pub fn Revision::sequence(Self) -> Int
+pub fn Revision::valid(Self) -> Span
+pub fn Revision::value(Self) -> String?
+
+pub struct RevisionPage {
+  items : Array[Revision]
+  offset : Int
+  total : Int
+  next_offset : Int?
+}
+pub fn RevisionPage::is_empty(Self) -> Bool
+pub fn RevisionPage::items(Self) -> Array[Revision]
+pub fn RevisionPage::next_offset(Self) -> Int?
+pub fn RevisionPage::offset(Self) -> Int
+pub fn RevisionPage::total(Self) -> Int
+
+pub struct Segment {
+  valid : Span
+  source : Revision?
+}
+pub fn Segment::is_deleted(Self) -> Bool
+pub fn Segment::is_gap(Self) -> Bool
+pub fn Segment::source(Self) -> Revision?
+pub fn Segment::valid(Self) -> Span
+pub fn Segment::value(Self) -> String?
+
+pub struct SnapshotSegment {
+  valid : Span
+  facts : Array[Fact]
+}
+pub fn SnapshotSegment::facts(Self) -> Array[Fact]
+pub fn SnapshotSegment::valid(Self) -> Span
+pub fn SnapshotSegment::value(Self, String) -> String?
+
+pub struct Span {
+  start : Int64
+  end : Int64?
+}
+pub fn Span::coalesce(Self, Self) -> Self?
+pub fn Span::contains(Self, Int64) -> Bool
+pub fn Span::covers(Self, Self) -> Bool
+pub fn Span::end(Self) -> Int64?
+pub fn Span::intersection(Self, Self) -> Self?
+pub fn Span::new(Int64, Int64) -> Self raise TemporalError
+pub fn Span::open(Int64) -> Self
+pub fn Span::overlaps(Self, Self) -> Bool
+pub fn Span::start(Self) -> Int64
+pub fn Span::subtract(Self, Self) -> Array[Self]
+pub fn Span::touches(Self, Self) -> Bool
+
+pub(all) enum SpanFilter {
+  Assigned
+  Equals(String)
+  Withdrawn
+  Unclaimed
+}
+
+pub struct TemporalMatrix {
+  key : String
+  valid_samples : Array[Int64]
+  knowledge_samples : Array[Int64]
+  cells : Array[MatrixCell]
+}
+pub fn TemporalMatrix::cell(Self, Int, Int) -> MatrixCell?
+pub fn TemporalMatrix::cell_count(Self) -> Int
+pub fn TemporalMatrix::changed_rows(Self, Int, Int) -> Int
+pub fn TemporalMatrix::column(Self, Int) -> Array[MatrixCell]
+pub fn TemporalMatrix::columns(Self) -> Int
+pub fn TemporalMatrix::key(Self) -> String
+pub fn TemporalMatrix::knowledge_samples(Self) -> Array[Int64]
+pub fn TemporalMatrix::row(Self, Int) -> Array[MatrixCell]
+pub fn TemporalMatrix::rows(Self) -> Int
+pub fn TemporalMatrix::to_json(Self) -> Json
+pub fn TemporalMatrix::to_json_string(Self) -> String
+pub fn TemporalMatrix::valid_samples(Self) -> Array[Int64]
+
+pub struct ValueChange {
+  key : String
+  before : String?
+  after : String?
+  before_source : Revision?
+  after_source : Revision?
+}
+pub fn ValueChange::after(Self) -> String?
+pub fn ValueChange::after_source(Self) -> Revision?
+pub fn ValueChange::before(Self) -> String?
+pub fn ValueChange::before_source(Self) -> Revision?
+pub fn ValueChange::key(Self) -> String
+
+pub struct ValueDuration {
+  value : String
+  duration : Int64
+}
+pub fn ValueDuration::duration(Self) -> Int64
+pub fn ValueDuration::value(Self) -> String
+
+pub struct WindowChange {
+  valid : Span
+  before : String?
+  after : String?
+}
+pub fn WindowChange::after(Self) -> String?
+pub fn WindowChange::before(Self) -> String?
+pub fn WindowChange::to_json(Self) -> Json
+pub fn WindowChange::valid(Self) -> Span
+
+// Type aliases
+
+// Traits
