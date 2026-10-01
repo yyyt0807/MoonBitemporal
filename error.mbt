@@ -7,6 +7,7 @@ pub(all) suberror TemporalError {
   KnowledgeTimeNotIncreasing(previous~ : Int64, proposed~ : Int64)
   OverlappingBatchChanges(key~ : String, first~ : Int, second~ : Int)
   TooManyRevisions(maximum~ : Int)
+  TooManySegments(maximum~ : Int)
 }
 
 ///|
@@ -18,5 +19,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     KnowledgeTimeNotIncreasing(..) => "TEMPORAL_KNOWLEDGE_ORDER"
     OverlappingBatchChanges(..) => "TEMPORAL_BATCH_OVERLAP"
     TooManyRevisions(..) => "TEMPORAL_REVISION_LIMIT"
+    TooManySegments(..) => "TEMPORAL_SEGMENT_LIMIT"
   }
 }
