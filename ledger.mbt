@@ -2,6 +2,7 @@
 /// Immutable, append-only revision ledger. A successful commit returns a new ledger.
 pub struct Ledger {
   revisions : Array[Revision]
+  index : Map[String, Array[Int]]
   latest_time : Int64?
   maximum : Int
 }
@@ -11,7 +12,20 @@ pub fn Ledger::new(maximum? : Int = 1000000) -> Ledger raise TemporalError {
   if maximum <= 0 {
     raise TooManyRevisions(maximum~)
   }
-  { revisions: [], latest_time: None, maximum }
+  { revisions: [], index: Map([]), latest_time: None, maximum }
+}
+
+///|
+/// Build a private index instead of sharing mutable per-key arrays between ledgers.
+fn build_index(revisions : Array[Revision]) -> Map[String, Array[Int]] {
+  let index : Map[String, Array[Int]] = Map([])
+  for i, revision in revisions {
+    match index.get(revision.key) {
+      Some(positions) => positions.push(i)
+      None => index[revision.key] = [i]
+    }
+  }
+  index
 }
 
 ///|
@@ -67,7 +81,12 @@ pub fn Ledger::commit(
       sequence: revisions.length(),
     })
   }
-  { revisions, latest_time: Some(known_at), maximum: self.maximum }
+  {
+    revisions,
+    index: build_index(revisions),
+    latest_time: Some(known_at),
+    maximum: self.maximum,
+  }
 }
 
 ///|
@@ -78,12 +97,16 @@ pub fn Ledger::observe(
   valid_at : Int64,
   known_at : Int64,
 ) -> Revision? {
-  for i = self.revisions.length() - 1; i >= 0; i = i - 1 {
-    let revision = self.revisions[i]
-    if revision.key == key && revision.known_at <= known_at &&
-      revision.valid.contains(valid_at) {
-      return Some(revision)
+  match self.index.get(key) {
+    Some(positions) => {
+      for i = positions.length() - 1; i >= 0; i = i - 1 {
+        let revision = self.revisions[positions[i]]
+        if revision.known_at <= known_at && revision.valid.contains(valid_at) {
+          return Some(revision)
+        }
+      }
     }
+    None => ()
   }
   None
 }
@@ -106,10 +129,13 @@ pub fn Ledger::get(
 /// All historical claims about one key, in append order.
 pub fn Ledger::history(self : Ledger, key : String) -> Array[Revision] {
   let result : Array[Revision] = []
-  for revision in self.revisions {
-    if revision.key == key {
-      result.push(revision)
+  match self.index.get(key) {
+    Some(positions) => {
+      for position in positions {
+        result.push(self.revisions[position])
+      }
     }
+    None => ()
   }
   result
 }

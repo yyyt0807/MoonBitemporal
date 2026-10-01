@@ -59,8 +59,8 @@ pub fn Ledger::timeline(
     raise TooManySegments(maximum=max_segments)
   }
   let points : Array[Int64] = [bounds.start]
-  for revision in self.revisions {
-    if revision.key == key && revision.known_at <= known_at {
+  for revision in self.history(key) {
+    if revision.known_at <= known_at {
       match revision.valid.intersection(bounds) {
         Some(part) => {
           if part.start > bounds.start {
