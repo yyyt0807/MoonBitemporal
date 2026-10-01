@@ -8,6 +8,7 @@ pub(all) suberror TemporalError {
   OverlappingBatchChanges(key~ : String, first~ : Int, second~ : Int)
   TooManyRevisions(maximum~ : Int)
   TooManySegments(maximum~ : Int)
+  InvalidInstant(String)
 }
 
 ///|
@@ -20,5 +21,6 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     OverlappingBatchChanges(..) => "TEMPORAL_BATCH_OVERLAP"
     TooManyRevisions(..) => "TEMPORAL_REVISION_LIMIT"
     TooManySegments(..) => "TEMPORAL_SEGMENT_LIMIT"
+    InvalidInstant(_) => "TEMPORAL_INVALID_INSTANT"
   }
 }
