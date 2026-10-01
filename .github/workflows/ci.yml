@@ -39,3 +39,5 @@ jobs:
         run: moon run examples/calibration --target wasm-gc
       - name: Rollout example
         run: moon run examples/rollout --target wasm-gc
+      - name: Native workload smoke check
+        run: moon run benchmarks/main --target native --release
