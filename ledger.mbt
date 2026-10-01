@@ -12,7 +12,7 @@ pub fn Ledger::new(maximum? : Int = 1000000) -> Ledger raise TemporalError {
   if maximum <= 0 {
     raise TooManyRevisions(maximum~)
   }
-  { revisions: [], index: Map([]), latest_time: None, maximum }
+  { revisions: [], index: Map([]), latest_time: None, maximum, }
 }
 
 ///|
@@ -144,11 +144,10 @@ pub fn Ledger::get(
 pub fn Ledger::history(self : Ledger, key : String) -> Array[Revision] {
   let result : Array[Revision] = []
   match self.index.get(key) {
-    Some(positions) => {
+    Some(positions) =>
       for position in positions {
         result.push(self.revisions[position])
       }
-    }
     None => ()
   }
   result

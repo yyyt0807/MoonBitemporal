@@ -32,10 +32,11 @@ fn append_window_change(
 ) -> Unit raise TemporalError {
   if !output.is_empty() {
     let last = output.length() - 1
-    if output[last].before == before && output[last].after == after &&
+    if output[last].before == before &&
+      output[last].after == after &&
       output[last].valid.touches(valid) {
       output[last] = {
-        valid: { start: output[last].valid.start, end: valid.end },
+        valid: { start: output[last].valid.start, end: valid.end, },
         before,
         after,
       }
@@ -45,7 +46,7 @@ fn append_window_change(
   if output.length() >= maximum {
     raise TooManySegments(maximum~)
   }
-  output.push({ valid, before, after })
+  output.push({ valid, before, after, })
 }
 
 ///|
@@ -104,7 +105,9 @@ fn merge_timeline_changes(
         let old_value = a.value()
         let new_value = b.value()
         if old_value != new_value {
-          append_window_change(output, valid, old_value, new_value, max_segments)
+          append_window_change(
+            output, valid, old_value, new_value, max_segments,
+          )
         }
       }
       None => ()

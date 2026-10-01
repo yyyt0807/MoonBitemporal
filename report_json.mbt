@@ -75,10 +75,17 @@ pub fn MatrixCell::to_json(self : MatrixCell) -> Json {
   let fields : Map[String, Json] = Map([])
   fields["validAt"] = Json::string(format_instant(self.valid_at))
   fields["knownAt"] = Json::string(format_instant(self.known_at))
-  fields["state"] = Json::string(match self.source {
-    None => "unclaimed"
-    Some(revision) => if revision.value is None { "withdrawn" } else { "assigned" }
-  })
+  fields["state"] = Json::string(
+    match self.source {
+      None => "unclaimed"
+      Some(revision) =>
+        if revision.value is None {
+          "withdrawn"
+        } else {
+          "assigned"
+        }
+    },
+  )
   fields["value"] = optional_text_json(self.value())
   fields["sourceSequence"] = match self.source {
     Some(revision) => revision.sequence.to_json()

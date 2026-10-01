@@ -14,16 +14,24 @@ pub struct LedgerStats {
 }
 
 ///|
-pub fn LedgerStats::revisions(self : LedgerStats) -> Int { self.revisions }
+pub fn LedgerStats::revisions(self : LedgerStats) -> Int {
+  self.revisions
+}
 
 ///|
-pub fn LedgerStats::keys(self : LedgerStats) -> Int { self.keys }
+pub fn LedgerStats::keys(self : LedgerStats) -> Int {
+  self.keys
+}
 
 ///|
-pub fn LedgerStats::batches(self : LedgerStats) -> Int { self.batches }
+pub fn LedgerStats::batches(self : LedgerStats) -> Int {
+  self.batches
+}
 
 ///|
-pub fn LedgerStats::tombstones(self : LedgerStats) -> Int { self.tombstones }
+pub fn LedgerStats::tombstones(self : LedgerStats) -> Int {
+  self.tombstones
+}
 
 ///|
 pub fn LedgerStats::open_valid_spans(self : LedgerStats) -> Int {
@@ -77,10 +85,13 @@ pub fn Ledger::stats(self : Ledger) -> LedgerStats {
     }
     counts[revision.key] = count
     if count > most_revisions_for_key ||
-      (count == most_revisions_for_key && (match most_revised_key {
-        Some(previous) => revision.key.lexical_compare(previous) < 0
-        None => true
-      })) {
+      (
+        count == most_revisions_for_key &&
+        (match most_revised_key {
+          Some(previous) => revision.key.lexical_compare(previous) < 0
+          None => true
+        })
+      ) {
       most_revisions_for_key = count
       most_revised_key = Some(revision.key)
     }

@@ -1,24 +1,16 @@
 ///|
 test "window diff reports only changed valid-time fragments" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    10L,
-    [Change::put("price", try! Span::new(0L, 100L), "10")],
-  )
-  let second = try! first.commit(
-    20L,
-    [Change::put("price", try! Span::new(20L, 40L), "12")],
-  )
-  let third = try! second.commit(
-    30L,
-    [Change::delete("price", try! Span::new(70L, 80L))],
-  )
-  let changes = third.diff_timeline(
-    "price",
-    try! Span::new(0L, 100L),
-    10L,
-    30L,
-  )
+  let first = try! base.commit(10L, [
+    Change::put("price", try! Span::new(0L, 100L), "10"),
+  ])
+  let second = try! first.commit(20L, [
+    Change::put("price", try! Span::new(20L, 40L), "12"),
+  ])
+  let third = try! second.commit(30L, [
+    Change::delete("price", try! Span::new(70L, 80L)),
+  ])
+  let changes = third.diff_timeline("price", try! Span::new(0L, 100L), 10L, 30L)
   assert_eq(changes.length(), 2)
   assert_eq(changes[0].valid().start(), 20L)
   assert_eq(changes[0].valid().end(), Some(40L))

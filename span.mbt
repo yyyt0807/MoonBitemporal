@@ -10,12 +10,12 @@ pub fn Span::new(start : Int64, end : Int64) -> Span raise TemporalError {
   if end <= start {
     raise InvalidSpan("end must be greater than start")
   }
-  { start, end: Some(end) }
+  { start, end: Some(end), }
 }
 
 ///|
 pub fn Span::open(start : Int64) -> Span {
-  { start, end: None }
+  { start, end: None, }
 }
 
 ///|
@@ -30,7 +30,8 @@ pub fn Span::end(self : Span) -> Int64? {
 
 ///|
 pub fn Span::contains(self : Span, instant : Int64) -> Bool {
-  instant >= self.start && (match self.end {
+  instant >= self.start &&
+  (match self.end {
     Some(end) => instant < end
     None => true
   })
@@ -61,7 +62,7 @@ pub fn Span::intersection(self : Span, other : Span) -> Span? {
     (None, Some(b)) => Some(b)
     (None, None) => None
   }
-  Some({ start, end })
+  Some({ start, end, })
 }
 
 ///|

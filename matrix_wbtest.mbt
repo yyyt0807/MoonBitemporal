@@ -1,14 +1,12 @@
 ///|
 test "sample matrix exposes the two-clock correction surface" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    10L,
-    [Change::put("k", try! Span::new(0L, 20L), "old")],
-  )
-  let second = try! first.commit(
-    20L,
-    [Change::put("k", try! Span::new(5L, 10L), "new")],
-  )
+  let first = try! base.commit(10L, [
+    Change::put("k", try! Span::new(0L, 20L), "old"),
+  ])
+  let second = try! first.commit(20L, [
+    Change::put("k", try! Span::new(5L, 10L), "new"),
+  ])
   let matrix = try! second.sample_matrix("k", [2L, 7L, 15L], [5L, 10L, 20L])
   assert_eq(matrix.rows(), 3)
   assert_eq(matrix.columns(), 3)
@@ -30,12 +28,9 @@ test "matrix preserves input order and enforces product limit" {
   assert_eq(matrix.knowledge_samples(), [2L, 1L])
   assert_eq(matrix.cell(2, 1).unwrap().valid_at(), 10L)
   assert_eq(matrix.cell(2, 1).unwrap().known_at(), 1L)
-  let code = try ledger.sample_matrix(
-    "unknown",
-    [1L, 2L, 3L],
-    [1L, 2L],
-    max_cells=5,
-  ) catch {
+  let code = try
+    ledger.sample_matrix("unknown", [1L, 2L, 3L], [1L, 2L], max_cells=5)
+  catch {
     error => error.code()
   } noraise {
     _ => "accepted"

@@ -3,10 +3,9 @@ test "latest representable instant can be queried in an open valid span" {
   let base = try! Ledger::new()
   let earliest = -9223372036854775807L - 1L
   let latest = 9223372036854775807L
-  let ledger = try! base.commit(
-    earliest,
-    [Change::put("edge", Span::open(latest), "present")],
-  )
+  let ledger = try! base.commit(earliest, [
+    Change::put("edge", Span::open(latest), "present"),
+  ])
   assert_eq(ledger.get("edge", latest, earliest), Some("present"))
   assert_eq(ledger.get("edge", latest - 1L, earliest), None)
   let timeline = try! ledger.timeline("edge", Span::open(latest - 1L), earliest)
@@ -19,13 +18,10 @@ test "latest representable instant can be queried in an open valid span" {
 ///|
 test "same-instant adjacent batch changes remain distinct and ordered" {
   let builder = try! LedgerBuilder::new()
-  builder.append(
-    10L,
-    [
-      Change::put("k", try! Span::new(0L, 5L), "left"),
-      Change::put("k", try! Span::new(5L, 10L), "right"),
-    ],
-  )
+  builder.append(10L, [
+    Change::put("k", try! Span::new(0L, 5L), "left"),
+    Change::put("k", try! Span::new(5L, 10L), "right"),
+  ])
   let ledger = builder.freeze()
   assert_eq(ledger.stats().batches(), 1)
   assert_eq(ledger.history_count("k"), 2)

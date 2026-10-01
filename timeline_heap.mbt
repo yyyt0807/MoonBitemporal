@@ -18,7 +18,10 @@ fn timeline_higher(a : TimelineHeapItem, b : TimelineHeapItem) -> Bool {
 }
 
 ///|
-fn timeline_heap_push(heap : Array[TimelineHeapItem], item : TimelineHeapItem) -> Unit {
+fn timeline_heap_push(
+  heap : Array[TimelineHeapItem],
+  item : TimelineHeapItem,
+) -> Unit {
   heap.push(item)
   let mut child = heap.length() - 1
   while child > 0 {
@@ -74,9 +77,16 @@ fn timeline_expired(item : TimelineHeapItem, instant : Int64) -> Bool {
 }
 
 ///|
-fn timeline_heap_winner(heap : Array[TimelineHeapItem], instant : Int64) -> Revision? {
+fn timeline_heap_winner(
+  heap : Array[TimelineHeapItem],
+  instant : Int64,
+) -> Revision? {
   while !heap.is_empty() && timeline_expired(heap[0], instant) {
     timeline_heap_pop(heap)
   }
-  if heap.is_empty() { None } else { Some(heap[0].source) }
+  if heap.is_empty() {
+    None
+  } else {
+    Some(heap[0].source)
+  }
 }

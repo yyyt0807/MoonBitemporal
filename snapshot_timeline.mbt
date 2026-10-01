@@ -26,7 +26,10 @@ pub fn SnapshotSegment::value(self : SnapshotSegment, key : String) -> String? {
 }
 
 ///|
-fn unique_query_keys(keys : Array[String], max_keys : Int) -> Array[String] raise TemporalError {
+fn unique_query_keys(
+  keys : Array[String],
+  max_keys : Int,
+) -> Array[String] raise TemporalError {
   if max_keys < 0 {
     raise TooManyKeys(maximum=max_keys)
   }
@@ -88,8 +91,7 @@ pub fn Ledger::snapshot_timeline(
     } else {
       bounds.end
     }
-    if end == Some(start) ||
-      (i + 1 == unique.length() && bounds.end is Some(_)) {
+    if end == Some(start) || (i + 1 == unique.length() && bounds.end is Some(_)) {
       continue
     }
     if output.length() >= max_segments {
@@ -98,14 +100,15 @@ pub fn Ledger::snapshot_timeline(
     let facts : Array[Fact] = []
     for key in selected {
       match self.observe(key, start, known_at) {
-        Some(source) => match source.value {
-          Some(value) => facts.push({ key, value, source })
-          None => ()
-        }
+        Some(source) =>
+          match source.value {
+            Some(value) => facts.push({ key, value, source, })
+            None => ()
+          }
         None => ()
       }
     }
-    output.push({ valid: { start, end }, facts })
+    output.push({ valid: { start, end, }, facts, })
   }
   output
 }

@@ -69,7 +69,7 @@ pub fn Ledger::knowledge_timeline(
   for i = 0; i < points.length(); i = i + 1 {
     let start = points[i]
     while next_revision < applicable.length() &&
-      applicable[next_revision].known_at <= start {
+          applicable[next_revision].known_at <= start {
       winner = Some(applicable[next_revision])
       next_revision = next_revision + 1
     }
@@ -78,14 +78,13 @@ pub fn Ledger::knowledge_timeline(
     } else {
       bounds.end
     }
-    if end == Some(start) ||
-      (i + 1 == points.length() && bounds.end is Some(_)) {
+    if end == Some(start) || (i + 1 == points.length() && bounds.end is Some(_)) {
       continue
     }
     if output.length() >= max_segments {
       raise TooManySegments(maximum=max_segments)
     }
-    output.push({ known: { start, end }, source: winner })
+    output.push({ known: { start, end, }, source: winner, })
   }
   output
 }

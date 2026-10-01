@@ -17,17 +17,7 @@ test "canonical instant roundtrips signed boundaries" {
 ///|
 test "instant parser rejects ambiguous spellings and overflow" {
   let invalid = [
-    "",
-    "-",
-    "+1",
-    "00",
-    "01",
-    "-0",
-    "-01",
-    "1 ",
-    " 1",
-    "9223372036854775808",
-    "-9223372036854775809",
+    "", "-", "+1", "00", "01", "-0", "-01", "1 ", " 1", "9223372036854775808", "-9223372036854775809",
   ]
   for input in invalid {
     let rejected = try parse_instant(input) catch {

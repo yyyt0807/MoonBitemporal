@@ -20,10 +20,9 @@ test "trace limit reports truncation without changing winner" {
   let base = try! Ledger::new()
   let mut ledger = base
   for i = 0; i < 10; i = i + 1 {
-    ledger = ledger.commit(
-      i.to_int64(),
-      [Change::put("k", Span::open(0L), i.to_string())],
-    )
+    ledger = ledger.commit(i.to_int64(), [
+      Change::put("k", Span::open(0L), i.to_string()),
+    ])
   }
   let limited = ledger.trace("k", 1L, 9L, max_candidates=2)
   assert_eq(limited.value(), Some("9"))

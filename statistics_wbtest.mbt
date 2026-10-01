@@ -5,13 +5,10 @@ test "ledger statistics count batches keys and tombstones" {
   assert_eq(empty.revisions(), 0)
   assert_eq(empty.keys(), 0)
   assert_eq(empty.first_knowledge_time(), None)
-  let first = try! base.commit(
-    3L,
-    [
-      Change::put("b", Span::open(0L), "x"),
-      Change::put("a", try! Span::new(0L, 10L), "y"),
-    ],
-  )
+  let first = try! base.commit(3L, [
+    Change::put("b", Span::open(0L), "x"),
+    Change::put("a", try! Span::new(0L, 10L), "y"),
+  ])
   let second = try! first.commit(8L, [Change::delete("a", Span::open(10L))])
   let stats = second.stats()
   assert_eq(stats.revisions(), 3)

@@ -1,18 +1,15 @@
 ///|
 test "timeline preserves gaps corrections and tombstones" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    10L,
-    [Change::put("k", try! Span::new(5L, 15L), "old")],
-  )
-  let second = try! first.commit(
-    20L,
-    [Change::put("k", try! Span::new(8L, 12L), "new")],
-  )
-  let third = try! second.commit(
-    30L,
-    [Change::delete("k", try! Span::new(13L, 14L))],
-  )
+  let first = try! base.commit(10L, [
+    Change::put("k", try! Span::new(5L, 15L), "old"),
+  ])
+  let second = try! first.commit(20L, [
+    Change::put("k", try! Span::new(8L, 12L), "new"),
+  ])
+  let third = try! second.commit(30L, [
+    Change::delete("k", try! Span::new(13L, 14L)),
+  ])
   let timeline = try! third.timeline("k", try! Span::new(0L, 20L), 30L)
   assert_eq(timeline.length(), 7)
   assert_true(timeline[0].is_gap())

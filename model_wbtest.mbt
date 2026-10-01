@@ -9,7 +9,8 @@ fn model_value(
 ) -> String? {
   let mut value : String? = None
   for revision in ledger.revisions {
-    if revision.key == key && revision.known_at <= known_at &&
+    if revision.key == key &&
+      revision.known_at <= known_at &&
       revision.valid.contains(valid_at) {
       value = revision.value
     }
@@ -63,16 +64,15 @@ test "sweep segments partition a window and match the model at each point" {
   for key_index = 0; key_index < 5; key_index = key_index + 1 {
     let key = "key-" + key_index.to_string()
     for known_at in [0L, 17L, 44L, 89L] {
-      let segments = ledger.timeline(
-        key,
-        try! Span::new(0L, 100L),
-        known_at,
-      )
+      let segments = ledger.timeline(key, try! Span::new(0L, 100L), known_at)
       assert_true(!segments.is_empty())
       assert_eq(segments[0].valid().start(), 0L)
       assert_eq(segments[segments.length() - 1].valid().end(), Some(100L))
       for i = 1; i < segments.length(); i = i + 1 {
-        assert_eq(segments[i - 1].valid().end(), Some(segments[i].valid().start()))
+        assert_eq(
+          segments[i - 1].valid().end(),
+          Some(segments[i].valid().start()),
+        )
       }
       for valid_at = 0; valid_at < 100; valid_at = valid_at + 1 {
         let mut matches = 0
@@ -84,7 +84,10 @@ test "sweep segments partition a window and match the model at each point" {
           }
         }
         assert_eq(matches, 1)
-        assert_eq(actual, model_value(ledger, key, valid_at.to_int64(), known_at))
+        assert_eq(
+          actual,
+          model_value(ledger, key, valid_at.to_int64(), known_at),
+        )
       }
     }
   }
@@ -111,7 +114,10 @@ test "knowledge segments agree with point model across revisions" {
           }
         }
         assert_eq(count, 1)
-        assert_eq(actual, model_value(ledger, key, valid_at, known_at.to_int64()))
+        assert_eq(
+          actual,
+          model_value(ledger, key, valid_at, known_at.to_int64()),
+        )
       }
     }
   }

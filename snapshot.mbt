@@ -48,10 +48,11 @@ pub fn Ledger::snapshot(
   let facts : Array[Fact] = []
   for key in self.keys() {
     match self.observe(key, valid_at, known_at) {
-      Some(source) => match source.value {
-        Some(value) => facts.push({ key, value, source })
-        None => ()
-      }
+      Some(source) =>
+        match source.value {
+          Some(value) => facts.push({ key, value, source, })
+          None => ()
+        }
       None => ()
     }
   }

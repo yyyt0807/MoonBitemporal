@@ -2,10 +2,9 @@
 test "builder ingests many batches and freezes isolated checkpoints" {
   let builder = try! LedgerBuilder::new(maximum=1000)
   for i = 0; i < 300; i = i + 1 {
-    builder.append(
-      i.to_int64(),
-      [Change::put("series", Span::open(0L), i.to_string())],
-    )
+    builder.append(i.to_int64(), [
+      Change::put("series", Span::open(0L), i.to_string()),
+    ])
   }
   let checkpoint = builder.freeze()
   assert_eq(checkpoint.revision_count(), 300)
@@ -22,13 +21,12 @@ test "builder ingests many batches and freezes isolated checkpoints" {
 test "builder rejects bad batches without partial mutation" {
   let builder = try! LedgerBuilder::new(maximum=3)
   builder.append(1L, [Change::put("a", Span::open(0L), "a")])
-  let invalid = try builder.append(
-    2L,
-    [
+  let invalid = try
+    builder.append(2L, [
       Change::put("b", Span::open(0L), "first"),
       Change::put("b", Span::open(0L), "second"),
-    ],
-  ) catch {
+    ])
+  catch {
     error => error.code()
   } noraise {
     _ => "accepted"

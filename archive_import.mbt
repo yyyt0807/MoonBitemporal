@@ -1,5 +1,8 @@
 ///|
-fn archive_fields(value : Json, location : String) -> Map[String, Json] raise TemporalError {
+fn archive_fields(
+  value : Json,
+  location : String,
+) -> Map[String, Json] raise TemporalError {
   match value {
     Object(fields) => fields
     _ => raise InvalidArchive(location + " must be an object")
@@ -51,7 +54,10 @@ fn check_archive_fields(
 }
 
 ///|
-fn archive_revision(value : Json, index : Int) -> (Int64, Change) raise TemporalError {
+fn archive_revision(
+  value : Json,
+  index : Int,
+) -> (Int64, Change) raise TemporalError {
   let location = "revisions[" + index.to_string() + "]"
   let fields = archive_fields(value, location)
   check_archive_fields(
@@ -71,7 +77,7 @@ fn archive_revision(value : Json, index : Int) -> (Int64, Change) raise Temporal
     None => Span::open(start)
   }
   let value = archive_optional_string(fields, "value", location)
-  (known_at, { key, valid, value })
+  (known_at, { key, valid, value, })
 }
 
 ///|

@@ -64,7 +64,7 @@ pub fn Ledger::timeline(
     if revision.known_at <= known_at {
       match revision.valid.intersection(bounds) {
         Some(part) => {
-          events.push({ start: part.start, end: part.end, source: revision })
+          events.push({ start: part.start, end: part.end, source: revision, })
           if part.start > bounds.start {
             points.push(part.start)
           }
@@ -89,7 +89,13 @@ pub fn Ledger::timeline(
     }
   }
   events.sort_by(fn(a, b) {
-    if a.start < b.start { -1 } else if a.start > b.start { 1 } else { 0 }
+    if a.start < b.start {
+      -1
+    } else if a.start > b.start {
+      1
+    } else {
+      0
+    }
   })
   let output : Array[Segment] = []
   let heap : Array[TimelineHeapItem] = []
@@ -98,7 +104,7 @@ pub fn Ledger::timeline(
     let start = unique[i]
     while next_event < events.length() && events[next_event].start <= start {
       let event = events[next_event]
-      timeline_heap_push(heap, { end: event.end, source: event.source })
+      timeline_heap_push(heap, { end: event.end, source: event.source, })
       next_event = next_event + 1
     }
     let end = if i + 1 < unique.length() {
@@ -113,15 +119,19 @@ pub fn Ledger::timeline(
       continue
     }
     let source = timeline_heap_winner(heap, start)
-    let valid : Span = { start, end }
-    if !output.is_empty() && same_source(output[output.length() - 1].source, source) {
+    let valid : Span = { start, end, }
+    if !output.is_empty() &&
+      same_source(output[output.length() - 1].source, source) {
       let last = output.length() - 1
-      output[last] = { valid: { start: output[last].valid.start, end }, source }
+      output[last] = {
+        valid: { start: output[last].valid.start, end, },
+        source,
+      }
     } else {
       if output.length() >= max_segments {
         raise TooManySegments(maximum=max_segments)
       }
-      output.push({ valid, source })
+      output.push({ valid, source, })
     }
   }
   output

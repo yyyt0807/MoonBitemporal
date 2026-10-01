@@ -2,7 +2,9 @@
 test "archive tail reproduces later claims without altering earlier ledger" {
   let base = try! Ledger::new()
   let first = try! base.commit(10L, [Change::put("price", Span::open(0L), "10")])
-  let second = try! first.commit(20L, [Change::put("price", Span::open(5L), "11")])
+  let second = try! first.commit(20L, [
+    Change::put("price", Span::open(5L), "11"),
+  ])
   let third = try! second.commit(30L, [Change::delete("price", Span::open(9L))])
   let tail = third.to_json_since(10L)
   let restored = try! first.append_json(tail)
@@ -40,16 +42,14 @@ test "empty archive tail is an identity operation" {
 ///|
 test "bulk tail append preserves a long sequence without repeated commits" {
   let base = try! Ledger::new(maximum=2000)
-  let first = try! base.commit(
-    0L,
-    [Change::put("anchor", Span::open(0L), "base")],
-  )
+  let first = try! base.commit(0L, [
+    Change::put("anchor", Span::open(0L), "base"),
+  ])
   let mut remote = try! Ledger::new(maximum=2000)
   for i = 1; i <= 500; i = i + 1 {
-    remote = remote.commit(
-      i.to_int64(),
-      [Change::put("sensor", Span::open(0L), i.to_string())],
-    )
+    remote = remote.commit(i.to_int64(), [
+      Change::put("sensor", Span::open(0L), i.to_string()),
+    ])
   }
   let merged = try! first.append_ledger(remote)
   assert_eq(merged.revision_count(), 501)

@@ -63,7 +63,10 @@ fn JsonGuard::quoted(self : JsonGuard) -> String raise TemporalError {
 }
 
 ///|
-fn JsonGuard::scan_object(self : JsonGuard, depth : Int) -> Unit raise TemporalError {
+fn JsonGuard::scan_object(
+  self : JsonGuard,
+  depth : Int,
+) -> Unit raise TemporalError {
   ignore(self.consume(123))
   self.skip_space()
   if self.consume(125) {
@@ -93,7 +96,10 @@ fn JsonGuard::scan_object(self : JsonGuard, depth : Int) -> Unit raise TemporalE
 }
 
 ///|
-fn JsonGuard::scan_array(self : JsonGuard, depth : Int) -> Unit raise TemporalError {
+fn JsonGuard::scan_array(
+  self : JsonGuard,
+  depth : Int,
+) -> Unit raise TemporalError {
   ignore(self.consume(91))
   self.skip_space()
   if self.consume(93) {
@@ -117,8 +123,13 @@ fn JsonGuard::scan_atom(self : JsonGuard) -> Unit raise TemporalError {
   let start = self.offset
   while self.offset < self.text.length() {
     let code = self.text[self.offset].to_int()
-    if code == 44 || code == 93 || code == 125 ||
-      code == 32 || code == 9 || code == 10 || code == 13 {
+    if code == 44 ||
+      code == 93 ||
+      code == 125 ||
+      code == 32 ||
+      code == 9 ||
+      code == 10 ||
+      code == 13 {
       break
     }
     self.offset = self.offset + 1
@@ -129,7 +140,10 @@ fn JsonGuard::scan_atom(self : JsonGuard) -> Unit raise TemporalError {
 }
 
 ///|
-fn JsonGuard::scan_value(self : JsonGuard, depth : Int) -> Unit raise TemporalError {
+fn JsonGuard::scan_value(
+  self : JsonGuard,
+  depth : Int,
+) -> Unit raise TemporalError {
   if depth > self.max_depth {
     raise InvalidArchive("JSON nesting limit exceeded")
   }

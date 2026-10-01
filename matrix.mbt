@@ -8,13 +8,19 @@ pub struct MatrixCell {
 }
 
 ///|
-pub fn MatrixCell::valid_at(self : MatrixCell) -> Int64 { self.valid_at }
+pub fn MatrixCell::valid_at(self : MatrixCell) -> Int64 {
+  self.valid_at
+}
 
 ///|
-pub fn MatrixCell::known_at(self : MatrixCell) -> Int64 { self.known_at }
+pub fn MatrixCell::known_at(self : MatrixCell) -> Int64 {
+  self.known_at
+}
 
 ///|
-pub fn MatrixCell::source(self : MatrixCell) -> Revision? { self.source }
+pub fn MatrixCell::source(self : MatrixCell) -> Revision? {
+  self.source
+}
 
 ///|
 pub fn MatrixCell::value(self : MatrixCell) -> String? {
@@ -46,7 +52,9 @@ pub struct TemporalMatrix {
 }
 
 ///|
-pub fn TemporalMatrix::key(self : TemporalMatrix) -> String { self.key }
+pub fn TemporalMatrix::key(self : TemporalMatrix) -> String {
+  self.key
+}
 
 ///|
 pub fn TemporalMatrix::valid_samples(self : TemporalMatrix) -> Array[Int64] {
@@ -74,7 +82,11 @@ pub fn TemporalMatrix::cell_count(self : TemporalMatrix) -> Int {
 }
 
 ///|
-pub fn TemporalMatrix::cell(self : TemporalMatrix, row : Int, column : Int) -> MatrixCell? {
+pub fn TemporalMatrix::cell(
+  self : TemporalMatrix,
+  row : Int,
+  column : Int,
+) -> MatrixCell? {
   if row < 0 || row >= self.rows() || column < 0 || column >= self.columns() {
     return None
   }
@@ -82,7 +94,10 @@ pub fn TemporalMatrix::cell(self : TemporalMatrix, row : Int, column : Int) -> M
 }
 
 ///|
-pub fn TemporalMatrix::row(self : TemporalMatrix, index : Int) -> Array[MatrixCell] {
+pub fn TemporalMatrix::row(
+  self : TemporalMatrix,
+  index : Int,
+) -> Array[MatrixCell] {
   let output : Array[MatrixCell] = []
   if index < 0 || index >= self.rows() {
     return output
@@ -95,7 +110,10 @@ pub fn TemporalMatrix::row(self : TemporalMatrix, index : Int) -> Array[MatrixCe
 }
 
 ///|
-pub fn TemporalMatrix::column(self : TemporalMatrix, index : Int) -> Array[MatrixCell] {
+pub fn TemporalMatrix::column(
+  self : TemporalMatrix,
+  index : Int,
+) -> Array[MatrixCell] {
   let output : Array[MatrixCell] = []
   if index < 0 || index >= self.columns() {
     return output
@@ -115,8 +133,10 @@ pub fn TemporalMatrix::changed_rows(
   before_column : Int,
   after_column : Int,
 ) -> Int {
-  if before_column < 0 || before_column >= self.columns() ||
-    after_column < 0 || after_column >= self.columns() {
+  if before_column < 0 ||
+    before_column >= self.columns() ||
+    after_column < 0 ||
+    after_column >= self.columns() {
     return 0
   }
   let mut changes = 0
@@ -142,8 +162,10 @@ pub fn Ledger::sample_matrix(
   max_cells? : Int = 10000,
 ) -> TemporalMatrix raise TemporalError {
   if max_cells < 0 ||
-    (!knowledge_samples.is_empty() &&
-      valid_samples.length() > max_cells / knowledge_samples.length()) {
+    (
+      !knowledge_samples.is_empty() &&
+      valid_samples.length() > max_cells / knowledge_samples.length()
+    ) {
     raise TooManyCells(maximum=max_cells)
   }
   let cells : Array[MatrixCell] = []

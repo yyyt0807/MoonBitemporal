@@ -14,10 +14,14 @@ pub fn RevisionPage::items(self : RevisionPage) -> Array[Revision] {
 }
 
 ///|
-pub fn RevisionPage::offset(self : RevisionPage) -> Int { self.offset }
+pub fn RevisionPage::offset(self : RevisionPage) -> Int {
+  self.offset
+}
 
 ///|
-pub fn RevisionPage::total(self : RevisionPage) -> Int { self.total }
+pub fn RevisionPage::total(self : RevisionPage) -> Int {
+  self.total
+}
 
 ///|
 pub fn RevisionPage::next_offset(self : RevisionPage) -> Int? {
@@ -67,7 +71,7 @@ pub fn Ledger::page(
     }
   }
   let next_offset = if end < total { Some(end) } else { None }
-  { items, offset, total, next_offset }
+  { items, offset, total, next_offset, }
 }
 
 ///|
@@ -93,5 +97,5 @@ pub fn Ledger::history_page(
     }
   }
   let next_offset = if end < total { Some(end) } else { None }
-  { items, offset, total, next_offset }
+  { items, offset, total, next_offset, }
 }

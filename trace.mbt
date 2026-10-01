@@ -10,13 +10,19 @@ pub struct DecisionTrace {
 }
 
 ///|
-pub fn DecisionTrace::key(self : DecisionTrace) -> String { self.key }
+pub fn DecisionTrace::key(self : DecisionTrace) -> String {
+  self.key
+}
 
 ///|
-pub fn DecisionTrace::valid_at(self : DecisionTrace) -> Int64 { self.valid_at }
+pub fn DecisionTrace::valid_at(self : DecisionTrace) -> Int64 {
+  self.valid_at
+}
 
 ///|
-pub fn DecisionTrace::known_at(self : DecisionTrace) -> Int64 { self.known_at }
+pub fn DecisionTrace::known_at(self : DecisionTrace) -> Int64 {
+  self.known_at
+}
 
 ///|
 pub fn DecisionTrace::winner(self : DecisionTrace) -> Revision? {
@@ -40,7 +46,11 @@ pub fn DecisionTrace::truncated(self : DecisionTrace) -> Bool {
 
 ///|
 pub fn DecisionTrace::superseded_count(self : DecisionTrace) -> Int {
-  if self.candidates.is_empty() { 0 } else { self.candidates.length() - 1 }
+  if self.candidates.is_empty() {
+    0
+  } else {
+    self.candidates.length() - 1
+  }
 }
 
 ///|
@@ -74,5 +84,5 @@ pub fn Ledger::trace(
     }
     None => ()
   }
-  { key, valid_at, known_at, candidates, truncated }
+  { key, valid_at, known_at, candidates, truncated, }
 }

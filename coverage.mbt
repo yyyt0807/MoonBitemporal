@@ -6,10 +6,14 @@ pub struct ValueDuration {
 }
 
 ///|
-pub fn ValueDuration::value(self : ValueDuration) -> String { self.value }
+pub fn ValueDuration::value(self : ValueDuration) -> String {
+  self.value
+}
 
 ///|
-pub fn ValueDuration::duration(self : ValueDuration) -> Int64 { self.duration }
+pub fn ValueDuration::duration(self : ValueDuration) -> Int64 {
+  self.duration
+}
 
 ///|
 /// Duration totals distinguish a never-claimed gap from an explicit deletion.
@@ -22,16 +26,24 @@ pub struct Coverage {
 }
 
 ///|
-pub fn Coverage::total(self : Coverage) -> Int64 { self.total }
+pub fn Coverage::total(self : Coverage) -> Int64 {
+  self.total
+}
 
 ///|
-pub fn Coverage::assigned(self : Coverage) -> Int64 { self.assigned }
+pub fn Coverage::assigned(self : Coverage) -> Int64 {
+  self.assigned
+}
 
 ///|
-pub fn Coverage::withdrawn(self : Coverage) -> Int64 { self.withdrawn }
+pub fn Coverage::withdrawn(self : Coverage) -> Int64 {
+  self.withdrawn
+}
 
 ///|
-pub fn Coverage::unclaimed(self : Coverage) -> Int64 { self.unclaimed }
+pub fn Coverage::unclaimed(self : Coverage) -> Int64 {
+  self.unclaimed
+}
 
 ///|
 pub fn Coverage::values(self : Coverage) -> Array[ValueDuration] {
@@ -71,23 +83,24 @@ pub fn Ledger::coverage(
     let length = checked_span_duration(segment.valid)
     match segment.source {
       None => unclaimed = unclaimed + length
-      Some(source) => match source.value {
-        None => withdrawn = withdrawn + length
-        Some(value) => {
-          assigned = assigned + length
-          let previous = match durations.get(value) {
-            Some(previous) => previous
-            None => 0L
+      Some(source) =>
+        match source.value {
+          None => withdrawn = withdrawn + length
+          Some(value) => {
+            assigned = assigned + length
+            let previous = match durations.get(value) {
+              Some(previous) => previous
+              None => 0L
+            }
+            durations[value] = previous + length
           }
-          durations[value] = previous + length
         }
-      }
     }
   }
   let values : Array[ValueDuration] = []
   for value, duration in durations {
-    values.push({ value, duration })
+    values.push({ value, duration, })
   }
   values.sort_by(fn(a, b) { a.value.lexical_compare(b.value) })
-  { total, assigned, withdrawn, unclaimed, values }
+  { total, assigned, withdrawn, unclaimed, values, }
 }

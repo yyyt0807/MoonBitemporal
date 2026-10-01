@@ -1,14 +1,12 @@
 ///|
 test "coverage distinguishes unclaimed assigned and withdrawn time" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    1L,
-    [Change::put("rate", try! Span::new(2L, 8L), "A")],
-  )
-  let second = try! first.commit(
-    2L,
-    [Change::delete("rate", try! Span::new(5L, 7L))],
-  )
+  let first = try! base.commit(1L, [
+    Change::put("rate", try! Span::new(2L, 8L), "A"),
+  ])
+  let second = try! first.commit(2L, [
+    Change::delete("rate", try! Span::new(5L, 7L)),
+  ])
   let report = second.coverage("rate", try! Span::new(0L, 10L), 2L)
   assert_eq(report.total(), 10L)
   assert_eq(report.assigned(), 4L)
@@ -27,11 +25,13 @@ test "duration rejects unbounded and unrepresentable windows" {
   } noraise {
     _ => "accepted"
   }
-  let huge = try ledger.coverage(
-    "x",
-    try! Span::new(-9223372036854775807L - 1L, 9223372036854775807L),
-    0L,
-  ) catch {
+  let huge = try
+    ledger.coverage(
+      "x",
+      try! Span::new(-9223372036854775807L - 1L, 9223372036854775807L),
+      0L,
+    )
+  catch {
     error => error.code()
   } noraise {
     _ => "accepted"

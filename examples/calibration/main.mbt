@@ -4,13 +4,10 @@
 fn main raise {
   let month = try! @temporal.Span::new(0L, 30L)
   let base = try! @temporal.Ledger::new()
-  let initial = try! base.commit(
-    1L,
-    [
-      @temporal.Change::put("sensor/7/factor", month, "1.00"),
-      @temporal.Change::put("sensor/7/site", month, "line-a"),
-    ],
-  )
+  let initial = try! base.commit(1L, [
+    @temporal.Change::put("sensor/7/factor", month, "1.00"),
+    @temporal.Change::put("sensor/7/site", month, "line-a"),
+  ])
   let report_day = 12L
   let reported = initial.snapshot(report_day, 1L)
   assert_eq(reported.length(), 2)
@@ -18,26 +15,20 @@ fn main raise {
 
   // The operator learns on intake step 5 that days [10, 15) had a different
   // calibration, then learns on step 7 that the device moved on day 20.
-  let calibrated = try! initial.commit(
-    5L,
-    [
-      @temporal.Change::put(
-        "sensor/7/factor",
-        try! @temporal.Span::new(10L, 15L),
-        "1.05",
-      ),
-    ],
-  )
-  let moved = try! calibrated.commit(
-    7L,
-    [
-      @temporal.Change::put(
-        "sensor/7/site",
-        try! @temporal.Span::new(20L, 30L),
-        "line-b",
-      ),
-    ],
-  )
+  let calibrated = try! initial.commit(5L, [
+    @temporal.Change::put(
+      "sensor/7/factor",
+      try! @temporal.Span::new(10L, 15L),
+      "1.05",
+    ),
+  ])
+  let moved = try! calibrated.commit(7L, [
+    @temporal.Change::put(
+      "sensor/7/site",
+      try! @temporal.Span::new(20L, 30L),
+      "line-b",
+    ),
+  ])
   assert_eq(moved.get("sensor/7/factor", report_day, 1L), Some("1.00"))
   assert_eq(moved.get("sensor/7/factor", report_day, 7L), Some("1.05"))
   assert_eq(moved.get("sensor/7/site", 25L, 7L), Some("line-b"))

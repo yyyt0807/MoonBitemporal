@@ -7,10 +7,14 @@ pub struct KeyChangeReport {
 }
 
 ///|
-pub fn KeyChangeReport::key(self : KeyChangeReport) -> String { self.key }
+pub fn KeyChangeReport::key(self : KeyChangeReport) -> String {
+  self.key
+}
 
 ///|
-pub fn KeyChangeReport::fragments(self : KeyChangeReport) -> Array[WindowChange] {
+pub fn KeyChangeReport::fragments(
+  self : KeyChangeReport,
+) -> Array[WindowChange] {
   self.fragments.copy()
 }
 
@@ -53,7 +57,9 @@ pub fn ChangeReport::fragment_count(self : ChangeReport) -> Int {
 }
 
 ///|
-pub fn ChangeReport::bounds(self : ChangeReport) -> Span { self.bounds }
+pub fn ChangeReport::bounds(self : ChangeReport) -> Span {
+  self.bounds
+}
 
 ///|
 pub fn ChangeReport::before_known(self : ChangeReport) -> Int64 {
@@ -130,7 +136,7 @@ pub fn compare_all_keys(
         raise TooManySegments(maximum=max_fragments)
       }
       fragments = fragments + differences.length()
-      entries.push({ key, fragments: differences })
+      entries.push({ key, fragments: differences, })
     }
   }
   {

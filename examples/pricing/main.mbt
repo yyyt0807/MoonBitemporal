@@ -4,10 +4,9 @@
 fn main raise {
   let quarter = try! @temporal.Span::new(0L, 90L)
   let opening = try! @temporal.Ledger::new()
-  let published = try! opening.commit(
-    10L,
-    [@temporal.Change::put("sku/coffee", quarter, "USD 10.00")],
-  )
+  let published = try! opening.commit(10L, [
+    @temporal.Change::put("sku/coffee", quarter, "USD 10.00"),
+  ])
 
   // At knowledge time 10, the invoice for day 35 used the original price.
   let original_invoice = published.get("sku/coffee", 35L, 10L)
@@ -15,16 +14,13 @@ fn main raise {
   println("Invoice originally issued for day 35: USD 10.00")
 
   // A correction on knowledge day 20 applies only to valid days [30, 45).
-  let revised = try! published.commit_with_report(
-    20L,
-    [
-      @temporal.Change::put(
-        "sku/coffee",
-        try! @temporal.Span::new(30L, 45L),
-        "USD 9.50",
-      ),
-    ],
-  )
+  let revised = try! published.commit_with_report(20L, [
+    @temporal.Change::put(
+      "sku/coffee",
+      try! @temporal.Span::new(30L, 45L),
+      "USD 9.50",
+    ),
+  ])
   assert_eq(revised.changed_fragment_count(), 1)
   let ledger = revised.next()
   let corrected_bill = ledger.get("sku/coffee", 35L, 20L)

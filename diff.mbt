@@ -56,7 +56,7 @@ pub fn Ledger::diff_knowledge(
     let before = observed_value(before_source)
     let after = observed_value(after_source)
     if before != after {
-      output.push({ key, before, after, before_source, after_source })
+      output.push({ key, before, after, before_source, after_source, })
     }
   }
   output
@@ -77,7 +77,7 @@ pub fn Ledger::diff_valid(
     let before = observed_value(before_source)
     let after = observed_value(after_source)
     if before != after {
-      output.push({ key, before, after, before_source, after_source })
+      output.push({ key, before, after, before_source, after_source, })
     }
   }
   output

@@ -27,11 +27,11 @@ pub fn Span::subtract(self : Span, other : Span) -> Array[Span] {
     Some(shared) => {
       let result : Array[Span] = []
       if self.start < shared.start {
-        result.push({ start: self.start, end: Some(shared.start) })
+        result.push({ start: self.start, end: Some(shared.start), })
       }
       if end_before(shared.end, self.end) {
         match shared.end {
-          Some(start) => result.push({ start, end: self.end })
+          Some(start) => result.push({ start, end: self.end, })
           None => ()
         }
       }
@@ -48,7 +48,7 @@ pub fn Span::coalesce(self : Span, other : Span) -> Span? {
   }
   let start = if self.start < other.start { self.start } else { other.start }
   let end = if end_before(self.end, other.end) { other.end } else { self.end }
-  Some({ start, end })
+  Some({ start, end, })
 }
 
 ///|
@@ -62,7 +62,13 @@ pub fn normalize_spans(input : Array[Span], bounds : Span) -> Array[Span] {
     }
   }
   clipped.sort_by(fn(a, b) {
-    if a.start < b.start { -1 } else if a.start > b.start { 1 } else { 0 }
+    if a.start < b.start {
+      -1
+    } else if a.start > b.start {
+      1
+    } else {
+      0
+    }
   })
   let result : Array[Span] = []
   for span in clipped {
@@ -87,7 +93,7 @@ pub fn gaps(input : Array[Span], bounds : Span) -> Array[Span] {
   let mut cursor = bounds.start
   for span in occupied {
     if cursor < span.start {
-      result.push({ start: cursor, end: Some(span.start) })
+      result.push({ start: cursor, end: Some(span.start), })
     }
     match span.end {
       Some(end) => cursor = end
@@ -95,8 +101,8 @@ pub fn gaps(input : Array[Span], bounds : Span) -> Array[Span] {
     }
   }
   match bounds.end {
-    Some(end) if cursor < end => result.push({ start: cursor, end: Some(end) })
-    None => result.push({ start: cursor, end: None })
+    Some(end) if cursor < end => result.push({ start: cursor, end: Some(end), })
+    None => result.push({ start: cursor, end: None, })
     _ => ()
   }
   result

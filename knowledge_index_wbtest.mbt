@@ -1,17 +1,13 @@
 ///|
 test "binary knowledge cutoff handles batches and times outside history" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    -10L,
-    [
-      Change::put("k", try! Span::new(0L, 10L), "early"),
-      Change::put("k", try! Span::new(10L, 20L), "other span"),
-    ],
-  )
-  let second = try! first.commit(
-    5L,
-    [Change::put("k", try! Span::new(0L, 10L), "late")],
-  )
+  let first = try! base.commit(-10L, [
+    Change::put("k", try! Span::new(0L, 10L), "early"),
+    Change::put("k", try! Span::new(10L, 20L), "other span"),
+  ])
+  let second = try! first.commit(5L, [
+    Change::put("k", try! Span::new(0L, 10L), "late"),
+  ])
   assert_eq(second.get("k", 1L, -11L), None)
   assert_eq(second.get("k", 1L, -10L), Some("early"))
   assert_eq(second.get("k", 1L, 4L), Some("early"))
@@ -31,7 +27,10 @@ test "binary cutoff agrees with forward model for every knowledge instant" {
         valid_at.to_int64(),
         known_at.to_int64(),
       )
-      assert_eq(ledger.get("key-2", valid_at.to_int64(), known_at.to_int64()), expected)
+      assert_eq(
+        ledger.get("key-2", valid_at.to_int64(), known_at.to_int64()),
+        expected,
+      )
     }
   }
 }

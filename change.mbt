@@ -8,12 +8,12 @@ pub struct Change {
 
 ///|
 pub fn Change::put(key : String, valid : Span, value : String) -> Change {
-  { key, valid, value: Some(value) }
+  { key, valid, value: Some(value), }
 }
 
 ///|
 pub fn Change::delete(key : String, valid : Span) -> Change {
-  { key, valid, value: None }
+  { key, valid, value: None, }
 }
 
 ///|

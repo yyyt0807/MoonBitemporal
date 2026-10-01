@@ -2,10 +2,9 @@
 test "revision pages preserve order and expose a terminating cursor" {
   let mut ledger = try! Ledger::new()
   for i = 0; i < 9; i = i + 1 {
-    ledger = ledger.commit(
-      i.to_int64(),
-      [Change::put("k", Span::open(0L), i.to_string())],
-    )
+    ledger = ledger.commit(i.to_int64(), [
+      Change::put("k", Span::open(0L), i.to_string()),
+    ])
   }
   let first = ledger.page(0, 4)
   assert_eq(first.total(), 9)
@@ -23,10 +22,10 @@ test "revision pages preserve order and expose a terminating cursor" {
 ///|
 test "per-key pages retain global sequence and reject invalid limits" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    1L,
-    [Change::put("a", Span::open(0L), "1"), Change::put("b", Span::open(0L), "x")],
-  )
+  let first = try! base.commit(1L, [
+    Change::put("a", Span::open(0L), "1"),
+    Change::put("b", Span::open(0L), "x"),
+  ])
   let second = try! first.commit(2L, [Change::put("a", Span::open(0L), "2")])
   let page = second.history_page("a", 0, 10)
   assert_eq(page.total(), 2)

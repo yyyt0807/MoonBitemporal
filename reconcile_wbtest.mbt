@@ -33,20 +33,20 @@ test "reconcile compares claim spans and enforces receiver capacity" {
   let base = try! Ledger::new(maximum=1)
   let receiver = try! base.commit(1L, [Change::put("k", Span::open(0L), "a")])
   let remote_base = try! Ledger::new(maximum=3)
-  let remote_first = try! remote_base.commit(
-    1L,
-    [Change::put("k", Span::open(0L), "a")],
-  )
-  let remote = try! remote_first.commit(2L, [Change::delete("k", Span::open(5L))])
+  let remote_first = try! remote_base.commit(1L, [
+    Change::put("k", Span::open(0L), "a"),
+  ])
+  let remote = try! remote_first.commit(2L, [
+    Change::delete("k", Span::open(5L)),
+  ])
   let code = try receiver.reconcile(remote) catch {
     error => error.code()
   } noraise {
     _ => "accepted"
   }
   assert_eq(code, "TEMPORAL_REVISION_LIMIT")
-  let different_span = try! remote_base.commit(
-    1L,
-    [Change::put("k", Span::open(1L), "a")],
-  )
+  let different_span = try! remote_base.commit(1L, [
+    Change::put("k", Span::open(1L), "a"),
+  ])
   assert_eq(receiver.first_divergence(different_span), Some(0))
 }

@@ -1,21 +1,16 @@
 ///|
 test "multi-key snapshot timeline aligns changes from distinct keys" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    1L,
-    [
-      Change::put("price", Span::open(0L), "10"),
-      Change::put("tax", Span::open(0L), "2"),
-    ],
-  )
-  let second = try! first.commit(
-    2L,
-    [Change::put("price", try! Span::new(3L, 7L), "11")],
-  )
-  let third = try! second.commit(
-    3L,
-    [Change::delete("tax", try! Span::new(5L, 8L))],
-  )
+  let first = try! base.commit(1L, [
+    Change::put("price", Span::open(0L), "10"),
+    Change::put("tax", Span::open(0L), "2"),
+  ])
+  let second = try! first.commit(2L, [
+    Change::put("price", try! Span::new(3L, 7L), "11"),
+  ])
+  let third = try! second.commit(3L, [
+    Change::delete("tax", try! Span::new(5L, 8L)),
+  ])
   let view = third.snapshot_timeline(
     ["tax", "price", "tax"],
     try! Span::new(0L, 10L),
@@ -33,7 +28,9 @@ test "multi-key snapshot timeline aligns changes from distinct keys" {
 test "multi-key timeline enforces key and segment limits" {
   let ledger = try! Ledger::new()
   let bounds = try! Span::new(0L, 10L)
-  let limit = try ledger.snapshot_timeline(["a", "b"], bounds, 0L, max_keys=1) catch {
+  let limit = try
+    ledger.snapshot_timeline(["a", "b"], bounds, 0L, max_keys=1)
+  catch {
     error => error.code()
   } noraise {
     _ => "accepted"

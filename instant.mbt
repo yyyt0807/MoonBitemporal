@@ -32,7 +32,11 @@ pub fn parse_instant(text : String) -> Int64 raise TemporalError {
     }
     value = value * 10L - digit
   }
-  if negative { value } else { -value }
+  if negative {
+    value
+  } else {
+    -value
+  }
 }
 
 ///|

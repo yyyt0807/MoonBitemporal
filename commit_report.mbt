@@ -56,5 +56,5 @@ pub fn Ledger::commit_with_report(
       impacts.push(item)
     }
   }
-  { next, impacts, known_at, appended: changes.length() }
+  { next, impacts, known_at, appended: changes.length(), }
 }

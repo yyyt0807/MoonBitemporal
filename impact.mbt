@@ -48,7 +48,12 @@ fn before_revision(
 ) -> Revision? {
   match ledger.index.get(key) {
     Some(positions) => {
-      let eligible = key_upper_bound(ledger.revisions, positions, known_at, false)
+      let eligible = key_upper_bound(
+        ledger.revisions,
+        positions,
+        known_at,
+        false,
+      )
       for i = eligible - 1; i >= 0; i = i - 1 {
         let item = ledger.revisions[positions[i]]
         if item.valid.contains(valid_at) {
@@ -117,17 +122,23 @@ pub fn Ledger::impact_of_revision(
       (i + 1 == unique.length() && target.valid.end is Some(_)) {
       continue
     }
-    let previous_source = before_revision(self, target.key, start, target.known_at)
+    let previous_source = before_revision(
+      self,
+      target.key,
+      start,
+      target.known_at,
+    )
     let before = observed_value(previous_source)
     if before == target.value {
       continue
     }
-    if !output.is_empty() && output[output.length() - 1].valid.end == Some(start) &&
+    if !output.is_empty() &&
+      output[output.length() - 1].valid.end == Some(start) &&
       same_source(output[output.length() - 1].previous_source, previous_source) {
       let last = output.length() - 1
       output[last] = {
         key: target.key,
-        valid: { start: output[last].valid.start, end },
+        valid: { start: output[last].valid.start, end, },
         before,
         after: target.value,
         previous_source,
@@ -139,7 +150,7 @@ pub fn Ledger::impact_of_revision(
       }
       output.push({
         key: target.key,
-        valid: { start, end },
+        valid: { start, end, },
         before,
         after: target.value,
         previous_source,

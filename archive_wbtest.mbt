@@ -1,14 +1,12 @@
 ///|
 test "archive retains full-range instants and correction history" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    -9223372036854775807L - 1L,
-    [Change::put("price", Span::open(-5L), "初始")],
-  )
-  let second = try! first.commit(
-    9223372036854775807L,
-    [Change::put("price", try! Span::new(0L, 1L), "更正")],
-  )
+  let first = try! base.commit(-9223372036854775807L - 1L, [
+    Change::put("price", Span::open(-5L), "初始"),
+  ])
+  let second = try! first.commit(9223372036854775807L, [
+    Change::put("price", try! Span::new(0L, 1L), "更正"),
+  ])
   let encoded = second.to_json_string()
   let parsed = @json.parse(encoded)
   let restored = try! Ledger::from_json(parsed)
@@ -20,8 +18,12 @@ test "archive retains full-range instants and correction history" {
 
 ///|
 test "archive rejects unknown fields and invalid ranges" {
-  let unknown = @json.parse("{\"schemaVersion\":1,\"revisions\":[],\"extra\":true}")
-  let invalid = @json.parse("{\"schemaVersion\":1,\"revisions\":[{\"knownAt\":\"1\",\"key\":\"x\",\"validFrom\":\"3\",\"validTo\":\"2\",\"value\":\"a\"}]}")
+  let unknown = @json.parse(
+    "{\"schemaVersion\":1,\"revisions\":[],\"extra\":true}",
+  )
+  let invalid = @json.parse(
+    "{\"schemaVersion\":1,\"revisions\":[{\"knownAt\":\"1\",\"key\":\"x\",\"validFrom\":\"3\",\"validTo\":\"2\",\"value\":\"a\"}]}",
+  )
   let a = try Ledger::from_json(unknown) catch {
     _ => true
   } noraise {
@@ -40,10 +42,9 @@ test "archive rejects unknown fields and invalid ranges" {
 test "bulk archive import retains hundreds of sequential knowledge batches" {
   let mut source = try! Ledger::new(maximum=1000)
   for i = 0; i < 500; i = i + 1 {
-    source = source.commit(
-      i.to_int64(),
-      [Change::put("k", Span::open(0L), i.to_string())],
-    )
+    source = source.commit(i.to_int64(), [
+      Change::put("k", Span::open(0L), i.to_string()),
+    ])
   }
   let archive = source.to_json_string()
   let restored = try! Ledger::from_json_string(archive, maximum=1000)

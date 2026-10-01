@@ -35,12 +35,10 @@ pub fn Ledger::matching_spans(
   let output : Array[Span] = []
   for segment in timeline {
     if filter.accepts(segment) {
-      if !output.is_empty() && output[output.length() - 1].touches(segment.valid) {
+      if !output.is_empty() &&
+        output[output.length() - 1].touches(segment.valid) {
         let last = output.length() - 1
-        output[last] = {
-          start: output[last].start,
-          end: segment.valid.end,
-        }
+        output[last] = { start: output[last].start, end: segment.valid.end, }
       } else {
         if output.length() >= max_segments {
           raise TooManySegments(maximum=max_segments)

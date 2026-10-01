@@ -12,17 +12,13 @@ pub struct LedgerBuilder {
 }
 
 ///|
-pub fn LedgerBuilder::new(maximum? : Int = 1000000) -> LedgerBuilder raise TemporalError {
+pub fn LedgerBuilder::new(
+  maximum? : Int = 1000000,
+) -> LedgerBuilder raise TemporalError {
   if maximum <= 0 {
     raise TooManyRevisions(maximum~)
   }
-  {
-    revisions: [],
-    index: Map([]),
-    latest_time: None,
-    maximum,
-    batches: 0,
-  }
+  { revisions: [], index: Map([]), latest_time: None, maximum, batches: 0, }
 }
 
 ///|

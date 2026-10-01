@@ -1,17 +1,13 @@
 ///|
 test "independent ledger comparison finds candidate deployment changes" {
   let base = try! Ledger::new()
-  let deployed = try! base.commit(
-    1L,
-    [Change::put("rule", try! Span::new(0L, 100L), "allow")],
-  )
-  let candidate = try! base.commit(
-    5L,
-    [
-      Change::put("rule", try! Span::new(0L, 40L), "allow"),
-      Change::put("rule", try! Span::new(40L, 100L), "deny"),
-    ],
-  )
+  let deployed = try! base.commit(1L, [
+    Change::put("rule", try! Span::new(0L, 100L), "allow"),
+  ])
+  let candidate = try! base.commit(5L, [
+    Change::put("rule", try! Span::new(0L, 40L), "allow"),
+    Change::put("rule", try! Span::new(40L, 100L), "deny"),
+  ])
   let changed = compare_ledgers(
     deployed,
     candidate,

@@ -1,8 +1,7 @@
 ///|
 test "text archive rejects duplicate keys including escaped spellings" {
   let inputs = [
-    "{\"schemaVersion\":1,\"schemaVersion\":1,\"revisions\":[]}",
-    "{\"schemaVersion\":1,\"revisions\":[{\"knownAt\":\"1\",\"key\":\"x\",\"validFrom\":\"0\",\"validTo\":null,\"value\":\"a\",\"\\u0076alue\":\"b\"}]}",
+    "{\"schemaVersion\":1,\"schemaVersion\":1,\"revisions\":[]}", "{\"schemaVersion\":1,\"revisions\":[{\"knownAt\":\"1\",\"key\":\"x\",\"validFrom\":\"0\",\"validTo\":null,\"value\":\"a\",\"\\u0076alue\":\"b\"}]}",
   ]
   for input in inputs {
     let code = try Ledger::from_json_string(input) catch {

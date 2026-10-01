@@ -14,13 +14,10 @@ test "knowledge projection preserves old views and drops later claims" {
 ///|
 test "key projection keeps relative order and renumbers sequences" {
   let base = try! Ledger::new()
-  let first = try! base.commit(
-    1L,
-    [
-      Change::put("a", Span::open(0L), "A"),
-      Change::put("b", Span::open(0L), "B"),
-    ],
-  )
+  let first = try! base.commit(1L, [
+    Change::put("a", Span::open(0L), "A"),
+    Change::put("b", Span::open(0L), "B"),
+  ])
   let second = try! first.commit(2L, [Change::put("b", Span::open(0L), "B2")])
   let only_b = second.select_keys(["b", "b"])
   assert_eq(only_b.revision_count(), 2)
