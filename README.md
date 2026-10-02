@@ -35,6 +35,8 @@ assert_eq(revised.get("sku/coffee", 50L, 20L), Some("USD 10"))
 
 `Ledger::observe` returns the winning revision, including a tombstone. `get` returns only the effective value, so use `observe` or `trace` when absence and withdrawal must be distinguished. `timeline` partitions a valid-time window at every source change; `knowledge_timeline` shows how belief about one valid instant evolved. `diff_timeline`, `change_report` and `compare_all_keys` identify affected spans and keys. `coverage` totals assigned, withdrawn and unclaimed duration in a **finite** window. `sample_matrix` provides a bounded valid-time × knowledge-time grid.
 
+October additions: `snapshot_selected` builds a bounded, sorted two-clock view for an explicit key set; `batch_at` retrieves one complete knowledge-time commit by binary search without scanning unrelated keys. See [October features](docs/OCTOBER_FEATURES.md).
+
 ## Ingestion, archives and integration
 
 `Ledger::commit` keeps old values immutable and is convenient for short histories. `LedgerBuilder` appends batches in place for larger ingest workloads; `freeze()` returns a detached ledger checkpoint. `commit_with_report` is a dry-run-friendly way to inspect value-level effects before retaining the returned ledger.

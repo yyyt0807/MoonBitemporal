@@ -141,6 +141,14 @@ pub fn KeyChangeReport::fragments(Self) -> Array[WindowChange]
 pub fn KeyChangeReport::key(Self) -> String
 pub fn KeyChangeReport::to_json(Self) -> Json
 
+pub struct KnowledgeBatch {
+  known_at : Int64
+  revisions : Array[Revision]
+}
+pub fn KnowledgeBatch::known_at(Self) -> Int64
+pub fn KnowledgeBatch::revisions(Self) -> Array[Revision]
+pub fn KnowledgeBatch::size(Self) -> Int
+
 pub struct KnowledgeSegment {
   known : Span
   source : Revision?
@@ -161,6 +169,7 @@ pub fn Ledger::append_json(Self, Json) -> Self raise TemporalError
 pub fn Ledger::append_json_string(Self, String, max_chars? : Int) -> Self raise TemporalError
 pub fn Ledger::append_ledger(Self, Self) -> Self raise TemporalError
 pub fn Ledger::as_known_at(Self, Int64) -> Self
+pub fn Ledger::batch_at(Self, Int64) -> KnowledgeBatch?
 pub fn Ledger::change_report(Self, Span, Int64, Int64, max_keys? : Int, max_fragments? : Int) -> ChangeReport raise TemporalError
 pub fn Ledger::commit(Self, Int64, Array[Change]) -> Self raise TemporalError
 pub fn Ledger::commit_with_report(Self, Int64, Array[Change], max_impacts? : Int) -> CommitReport raise TemporalError
@@ -191,6 +200,7 @@ pub fn Ledger::revision_count(Self) -> Int
 pub fn Ledger::sample_matrix(Self, String, Array[Int64], Array[Int64], max_cells? : Int) -> TemporalMatrix raise TemporalError
 pub fn Ledger::select_keys(Self, Array[String]) -> Self
 pub fn Ledger::snapshot(Self, Int64, Int64) -> Array[Fact]
+pub fn Ledger::snapshot_selected(Self, Array[String], Int64, Int64, max_keys? : Int) -> Array[Fact] raise TemporalError
 pub fn Ledger::snapshot_timeline(Self, Array[String], Span, Int64, max_keys? : Int, max_segments? : Int) -> Array[SnapshotSegment] raise TemporalError
 pub fn Ledger::stats(Self) -> LedgerStats
 pub fn Ledger::timeline(Self, String, Span, Int64, max_segments? : Int) -> Array[Segment] raise TemporalError
