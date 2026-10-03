@@ -37,6 +37,15 @@ pub(all) suberror TemporalError {
 pub fn TemporalError::code(Self) -> String
 
 // Types and methods
+pub struct BatchPage {
+  batches : Array[KnowledgeBatch]
+  next_known_at : Int64?
+  has_more : Bool
+}
+pub fn BatchPage::batches(Self) -> Array[KnowledgeBatch]
+pub fn BatchPage::has_more(Self) -> Bool
+pub fn BatchPage::next_known_at(Self) -> Int64?
+
 pub struct Change {
   key : String
   valid : Span
@@ -170,6 +179,7 @@ pub fn Ledger::append_json_string(Self, String, max_chars? : Int) -> Self raise 
 pub fn Ledger::append_ledger(Self, Self) -> Self raise TemporalError
 pub fn Ledger::as_known_at(Self, Int64) -> Self
 pub fn Ledger::batch_at(Self, Int64) -> KnowledgeBatch?
+pub fn Ledger::batches_since(Self, Int64?, max_batches? : Int, max_revisions? : Int) -> BatchPage raise TemporalError
 pub fn Ledger::change_report(Self, Span, Int64, Int64, max_keys? : Int, max_fragments? : Int) -> ChangeReport raise TemporalError
 pub fn Ledger::commit(Self, Int64, Array[Change]) -> Self raise TemporalError
 pub fn Ledger::commit_with_report(Self, Int64, Array[Change], max_impacts? : Int) -> CommitReport raise TemporalError
@@ -187,6 +197,7 @@ pub fn Ledger::history_count(Self, String) -> Int
 pub fn Ledger::history_page(Self, String, Int, Int) -> RevisionPage raise TemporalError
 pub fn Ledger::impact_of_revision(Self, Int, max_segments? : Int) -> Array[Impact] raise TemporalError
 pub fn Ledger::is_prefix_of(Self, Self) -> Bool
+pub fn Ledger::joint_assigned_spans(Self, Array[String], Span, Int64, max_keys? : Int, max_segments? : Int) -> Array[Span] raise TemporalError
 pub fn Ledger::keys(Self) -> Array[String]
 pub fn Ledger::knowledge_timeline(Self, String, Int64, Span, max_segments? : Int) -> Array[KnowledgeSegment] raise TemporalError
 pub fn Ledger::latest_time(Self) -> Int64?

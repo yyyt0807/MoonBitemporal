@@ -33,17 +33,18 @@ fn unique_query_keys(
   if max_keys < 0 {
     raise TooManyKeys(maximum=max_keys)
   }
-  let sorted = keys.copy()
-  sorted.sort_by(fn(a, b) { a.lexical_compare(b) })
+  let seen : Map[String, Bool] = Map([])
   let unique : Array[String] = []
-  for key in sorted {
-    if unique.is_empty() || unique[unique.length() - 1] != key {
+  for key in keys {
+    if !seen.contains(key) {
       if unique.length() >= max_keys {
         raise TooManyKeys(maximum=max_keys)
       }
       unique.push(key)
+      seen[key] = true
     }
   }
+  unique.sort_by(fn(a, b) { a.lexical_compare(b) })
   unique
 }
 
