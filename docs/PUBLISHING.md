@@ -18,7 +18,7 @@
 
 - 公开仓库 `yyyt0807/MoonBitemporal`，默认分支 `main`；GitHub API 核验拥有者为 yyyt0807。
 - 首次推送 56 条提交，GitHub API 核验全部 author.login 和 committer.login 均为 yyyt0807。
-- 发布源提交：`cbc09d5431ca126db310f48b599fe096f5708dce`；[发布 CI](https://github.com/yyyt0807/MoonBitemporal/actions/runs/37109618413) Ubuntu/Windows 作业全部成功。
+- 发布源提交：`7909f9ce25466b34c02e3c782dc561cd0a1a6b5d`；[发布 CI](https://github.com/yyyt0807/MoonBitemporal/actions/runs/37109618413) Ubuntu/Windows 作业全部成功。
 - 本地严格全后端 check/build/test 通过，各后端 85 项测试成功；维护示例及 Native release 负载成功。
 - Mooncakes `yyyt0807/moonbitemporal@0.1.0` 发布 API 返回 `200 OK`，归档与解包校验通过。
 - 独立 `发布验证/MoonBitemporal-yyyt0807-0.1.0` 从公共注册表下载 0.1.0，历史重放、完整批次分页和多键联合覆盖实际运行通过。
