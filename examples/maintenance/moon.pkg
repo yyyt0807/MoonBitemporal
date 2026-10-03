@@ -1,5 +1,5 @@
 import {
-  "oyjh0381/moonbitemporal" @temporal,
+  "yyyt0807/moonbitemporal" @temporal,
 }
 
 pkgtype(kind: "executable")

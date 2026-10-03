@@ -1,10 +1,10 @@
-name = "oyjh0381/moonbitemporal"
+name = "yyyt0807/moonbitemporal"
 
 version = "0.1.0"
 
 readme = "README.mbt.md"
 
-repository = "https://github.com/oyjh0381/MoonBitemporal"
+repository = "https://github.com/yyyt0807/MoonBitemporal"
 
 license = "Apache-2.0"
 

@@ -2,8 +2,23 @@
 
 MoonBitemporal is an original, pure MoonBit library for facts with **two time axes**: the valid interval when a value applies in the modeled world, and the knowledge instant when the application accepted a claim. It answers both “What do we now believe applied on day X?” and “What did the application believe on day X before a later correction arrived?”
 
-The repository is in local development. The planned module is `oyjh0381/moonbitemporal`; GitHub push and mooncakes.io publication will follow local completion and review. Do not use `moon add` until publication is confirmed.
+Package namespace: `yyyt0807/moonbitemporal`. Repository: [yyyt0807/MoonBitemporal](https://github.com/yyyt0807/MoonBitemporal).
 
+## Install as a dependency
+
+```sh
+moon add yyyt0807/moonbitemporal@0.1.0
+```
+
+Import the library in the consuming package's `moon.pkg`:
+
+```text
+import {
+  "yyyt0807/moonbitemporal" @temporal,
+}
+```
+
+Repository owner and maintenance commit identity: `yyyt0807`. License: Apache-2.0.
 ## Why this exists
 
 Pricing, access rules, reference data, calibration metadata and configuration all receive late corrections. Overwriting a record destroys the evidence needed to reproduce an earlier decision. A single timestamp cannot express both a backdated effective date and the later date when the correction became known. MoonBitemporal supplies those semantics without binding a MoonBit application to a particular database, clock, timezone, HTTP server or runtime target.

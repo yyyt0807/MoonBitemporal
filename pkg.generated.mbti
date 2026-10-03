@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "oyjh0381/moonbitemporal"
+package "yyyt0807/moonbitemporal"
 
 // Values
 pub fn compare_all_keys(Ledger, Ledger, Span, Int64, Int64, max_keys? : Int, max_fragments? : Int) -> ChangeReport raise TemporalError
