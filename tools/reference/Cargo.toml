@@ -1,0 +1,10 @@
+[package]
+name = "moonbitemporal-reference"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+bitemporal-runtime = "=0.1.0"
+chrono = "=0.4.44"
+serde_json = "=1.0.149"

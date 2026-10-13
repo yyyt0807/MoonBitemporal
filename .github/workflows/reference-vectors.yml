@@ -1,0 +1,27 @@
+name: Rust reference vectors
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Generate from published Rust reference 0.1.0
+        run: |
+          mkdir -p testdata
+          cargo run --manifest-path tools/reference/Cargo.toml --release > testdata/bitemporal-runtime-0.1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rust-reference-vectors
+          path: |
+            testdata/bitemporal-runtime-0.1.0.json
+            tools/reference/Cargo.lock
+      - name: Compare recorded fixture when available
+        run: git diff --exit-code -- testdata/bitemporal-runtime-0.1.0.json

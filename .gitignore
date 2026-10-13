@@ -3,6 +3,7 @@
 /.moon/
 *.exe
 *.log
+**/target/
 
 # Local development reports and application materials
 /docs/archive/
