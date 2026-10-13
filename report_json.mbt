@@ -58,9 +58,9 @@ pub fn ChangeReport::to_json(self : ChangeReport) -> Json {
   fields["validWindow"] = span_json(self.bounds)
   fields["beforeKnown"] = Json::string(format_instant(self.before_known))
   fields["afterKnown"] = Json::string(format_instant(self.after_known))
-  fields["keysExamined"] = self.keys_examined.to_json()
-  fields["keysChanged"] = self.entries.length().to_json()
-  fields["fragmentCount"] = self.fragments.to_json()
+  fields["keysExamined"] = Json(self.keys_examined)
+  fields["keysChanged"] = Json(self.entries.length())
+  fields["fragmentCount"] = Json(self.fragments)
   fields["entries"] = Json::array(entries)
   Json::object(fields)
 }
@@ -88,7 +88,7 @@ pub fn MatrixCell::to_json(self : MatrixCell) -> Json {
   )
   fields["value"] = optional_text_json(self.value())
   fields["sourceSequence"] = match self.source {
-    Some(revision) => revision.sequence.to_json()
+    Some(revision) => Json(revision.sequence)
     None => Json::null()
   }
   Json::object(fields)

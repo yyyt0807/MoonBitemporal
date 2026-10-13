@@ -75,6 +75,6 @@ pub fn Ledger::visible_count(
   self : Ledger,
   valid_at : Int64,
   known_at : Int64,
-) -> Int {
+) -> Int32 {
   self.snapshot(valid_at, known_at).length()
 }

@@ -71,7 +71,7 @@ pub fn Ledger::coverage(
   key : String,
   bounds : Span,
   known_at : Int64,
-  max_segments? : Int = 4096,
+  max_segments~ : Int32 = 4096,
 ) -> Coverage raise TemporalError {
   let total = checked_span_duration(bounds)
   let timeline = self.timeline(key, bounds, known_at, max_segments~)

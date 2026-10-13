@@ -2,7 +2,7 @@
 priv struct BatchEntry {
   key : String
   valid : Span
-  original_index : Int
+  original_index : Int32
 }
 
 ///|

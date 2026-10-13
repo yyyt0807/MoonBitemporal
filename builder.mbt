@@ -5,15 +5,15 @@
 /// and makes an isolated immutable snapshot only when `freeze` is requested.
 pub struct LedgerBuilder {
   revisions : Array[Revision]
-  index : Map[String, Array[Int]]
+  index : Map[String, Array[Int32]]
   mut latest_time : Int64?
-  maximum : Int
-  mut batches : Int
+  maximum : Int32
+  mut batches : Int32
 }
 
 ///|
 pub fn LedgerBuilder::new(
-  maximum? : Int = 1000000,
+  maximum~ : Int32 = 1000000,
 ) -> LedgerBuilder raise TemporalError {
   if maximum <= 0 {
     raise TooManyRevisions(maximum~)
@@ -44,12 +44,12 @@ pub fn LedgerBuilder::from_ledger(source : Ledger) -> LedgerBuilder {
 }
 
 ///|
-pub fn LedgerBuilder::revision_count(self : LedgerBuilder) -> Int {
+pub fn LedgerBuilder::revision_count(self : LedgerBuilder) -> Int32 {
   self.revisions.length()
 }
 
 ///|
-pub fn LedgerBuilder::batch_count(self : LedgerBuilder) -> Int {
+pub fn LedgerBuilder::batch_count(self : LedgerBuilder) -> Int32 {
   self.batches
 }
 
@@ -59,7 +59,7 @@ pub fn LedgerBuilder::latest_time(self : LedgerBuilder) -> Int64? {
 }
 
 ///|
-pub fn LedgerBuilder::remaining_capacity(self : LedgerBuilder) -> Int {
+pub fn LedgerBuilder::remaining_capacity(self : LedgerBuilder) -> Int32 {
   self.maximum - self.revisions.length()
 }
 

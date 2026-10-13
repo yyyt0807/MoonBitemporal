@@ -2,13 +2,13 @@
 /// Immutable, append-only revision ledger. A successful commit returns a new ledger.
 pub struct Ledger {
   revisions : Array[Revision]
-  index : Map[String, Array[Int]]
+  index : Map[String, Array[Int32]]
   latest_time : Int64?
-  maximum : Int
+  maximum : Int32
 }
 
 ///|
-pub fn Ledger::new(maximum? : Int = 1000000) -> Ledger raise TemporalError {
+pub fn Ledger::new(maximum~ : Int32 = 1000000) -> Ledger raise TemporalError {
   if maximum <= 0 {
     raise TooManyRevisions(maximum~)
   }
@@ -17,8 +17,8 @@ pub fn Ledger::new(maximum? : Int = 1000000) -> Ledger raise TemporalError {
 
 ///|
 /// Build a private index instead of sharing mutable per-key arrays between ledgers.
-fn build_index(revisions : Array[Revision]) -> Map[String, Array[Int]] {
-  let index : Map[String, Array[Int]] = Map([])
+fn build_index(revisions : Array[Revision]) -> Map[String, Array[Int32]] {
+  let index : Map[String, Array[Int32]] = Map([])
   for i, revision in revisions {
     match index.get(revision.key) {
       Some(positions) => positions.push(i)
@@ -32,10 +32,10 @@ fn build_index(revisions : Array[Revision]) -> Map[String, Array[Int]] {
 /// Position after the last revision eligible for a knowledge-time query.
 fn key_upper_bound(
   revisions : Array[Revision],
-  positions : Array[Int],
+  positions : Array[Int32],
   known_at : Int64,
   inclusive : Bool,
-) -> Int {
+) -> Int32 {
   let mut low = 0
   let mut high = positions.length()
   while low < high {
@@ -51,7 +51,7 @@ fn key_upper_bound(
 }
 
 ///|
-pub fn Ledger::revision_count(self : Ledger) -> Int {
+pub fn Ledger::revision_count(self : Ledger) -> Int32 {
   self.revisions.length()
 }
 
@@ -61,7 +61,7 @@ pub fn Ledger::latest_time(self : Ledger) -> Int64? {
 }
 
 ///|
-pub fn Ledger::revision(self : Ledger, index : Int) -> Revision? {
+pub fn Ledger::revision(self : Ledger, index : Int32) -> Revision? {
   self.revisions.get(index)
 }
 

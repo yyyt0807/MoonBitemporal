@@ -53,7 +53,7 @@ pub fn Ledger::timeline(
   key : String,
   bounds : Span,
   known_at : Int64,
-  max_segments? : Int = 4096,
+  max_segments~ : Int32 = 4096,
 ) -> Array[Segment] raise TemporalError {
   if max_segments <= 0 {
     raise TooManySegments(maximum=max_segments)

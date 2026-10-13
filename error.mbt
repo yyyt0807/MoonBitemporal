@@ -5,19 +5,19 @@ pub(all) suberror TemporalError {
   EmptyKey
   EmptyBatch
   KnowledgeTimeNotIncreasing(previous~ : Int64, proposed~ : Int64)
-  OverlappingBatchChanges(key~ : String, first~ : Int, second~ : Int)
-  TooManyRevisions(maximum~ : Int)
-  TooManySegments(maximum~ : Int)
+  OverlappingBatchChanges(key~ : String, first~ : Int32, second~ : Int32)
+  TooManyRevisions(maximum~ : Int32)
+  TooManySegments(maximum~ : Int32)
   InvalidInstant(String)
   InvalidArchive(String)
-  InvalidRevisionIndex(Int)
+  InvalidRevisionIndex(Int32)
   DuplicateArchiveKey
   UnboundedDuration
   DurationOverflow
-  TooManyKeys(maximum~ : Int)
+  TooManyKeys(maximum~ : Int32)
   InvalidPage(String)
-  DivergentHistory(index~ : Int)
-  TooManyCells(maximum~ : Int)
+  DivergentHistory(index~ : Int32)
+  TooManyCells(maximum~ : Int32)
 }
 
 ///|

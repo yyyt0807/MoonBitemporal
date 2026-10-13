@@ -50,7 +50,7 @@ pub fn Ledger::append_json(
 pub fn Ledger::append_json_string(
   self : Ledger,
   text : String,
-  max_chars? : Int = 16 * 1024 * 1024,
+  max_chars~ : Int32 = 16 * 1024 * 1024,
 ) -> Ledger raise TemporalError {
   let incoming = Ledger::from_json_string(
     text,

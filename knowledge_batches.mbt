@@ -17,7 +17,7 @@ pub fn KnowledgeBatch::revisions(self : KnowledgeBatch) -> Array[Revision] {
 }
 
 ///|
-pub fn KnowledgeBatch::size(self : KnowledgeBatch) -> Int {
+pub fn KnowledgeBatch::size(self : KnowledgeBatch) -> Int32 {
   self.revisions.length()
 }
 

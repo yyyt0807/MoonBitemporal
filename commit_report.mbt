@@ -5,7 +5,7 @@ pub struct CommitReport {
   next : Ledger
   impacts : Array[Impact]
   known_at : Int64
-  appended : Int
+  appended : Int32
 }
 
 ///|
@@ -24,12 +24,12 @@ pub fn CommitReport::known_at(self : CommitReport) -> Int64 {
 }
 
 ///|
-pub fn CommitReport::appended(self : CommitReport) -> Int {
+pub fn CommitReport::appended(self : CommitReport) -> Int32 {
   self.appended
 }
 
 ///|
-pub fn CommitReport::changed_fragment_count(self : CommitReport) -> Int {
+pub fn CommitReport::changed_fragment_count(self : CommitReport) -> Int32 {
   self.impacts.length()
 }
 
@@ -40,7 +40,7 @@ pub fn Ledger::commit_with_report(
   self : Ledger,
   known_at : Int64,
   changes : Array[Change],
-  max_impacts? : Int = 4096,
+  max_impacts~ : Int32 = 4096,
 ) -> CommitReport raise TemporalError {
   if max_impacts <= 0 {
     raise TooManySegments(maximum=max_impacts)

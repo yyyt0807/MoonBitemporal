@@ -50,7 +50,7 @@ pub fn Ledger::reconcile(
 ///|
 /// Return the first divergent position if the archives disagree, or `None`
 /// when either archive is a prefix of the other.
-pub fn Ledger::first_divergence(self : Ledger, other : Ledger) -> Int? {
+pub fn Ledger::first_divergence(self : Ledger, other : Ledger) -> Int32? {
   let common = if self.revisions.length() < other.revisions.length() {
     self.revisions.length()
   } else {

@@ -28,7 +28,7 @@ fn append_window_change(
   valid : Span,
   before : String?,
   after : String?,
-  maximum : Int,
+  maximum : Int32,
 ) -> Unit raise TemporalError {
   if !output.is_empty() {
     let last = output.length() - 1
@@ -58,7 +58,7 @@ pub fn Ledger::diff_timeline(
   bounds : Span,
   before_known : Int64,
   after_known : Int64,
-  max_segments? : Int = 4096,
+  max_segments~ : Int32 = 4096,
 ) -> Array[WindowChange] raise TemporalError {
   if max_segments <= 0 {
     raise TooManySegments(maximum=max_segments)
@@ -78,7 +78,7 @@ pub fn compare_ledgers(
   bounds : Span,
   before_known : Int64,
   after_known : Int64,
-  max_segments? : Int = 4096,
+  max_segments~ : Int32 = 4096,
 ) -> Array[WindowChange] raise TemporalError {
   if max_segments <= 0 {
     raise TooManySegments(maximum=max_segments)
@@ -92,7 +92,7 @@ pub fn compare_ledgers(
 fn merge_timeline_changes(
   before : Array[Segment],
   after : Array[Segment],
-  max_segments : Int,
+  max_segments : Int32,
 ) -> Array[WindowChange] raise TemporalError {
   let output : Array[WindowChange] = []
   let mut left = 0

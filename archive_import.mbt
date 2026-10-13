@@ -56,7 +56,7 @@ fn check_archive_fields(
 ///|
 fn archive_revision(
   value : Json,
-  index : Int,
+  index : Int32,
 ) -> (Int64, Change) raise TemporalError {
   let location = "revisions[" + index.to_string() + "]"
   let fields = archive_fields(value, location)
@@ -84,7 +84,7 @@ fn archive_revision(
 /// Import a schema-v1 archive by replaying validated atomic batches.
 pub fn Ledger::from_json(
   value : Json,
-  maximum? : Int = 1000000,
+  maximum~ : Int32 = 1000000,
 ) -> Ledger raise TemporalError {
   let fields = archive_fields(value, "root")
   check_archive_fields(fields, ["schemaVersion", "revisions"], "root")
@@ -142,8 +142,8 @@ pub fn Ledger::from_json(
 /// Parse a bounded JSON archive before replaying its revisions.
 pub fn Ledger::from_json_string(
   text : String,
-  maximum? : Int = 1000000,
-  max_chars? : Int = 16 * 1024 * 1024,
+  maximum~ : Int32 = 1000000,
+  max_chars~ : Int32 = 16 * 1024 * 1024,
 ) -> Ledger raise TemporalError {
   if max_chars <= 0 || text.length() > max_chars {
     raise InvalidArchive("archive exceeds character limit")

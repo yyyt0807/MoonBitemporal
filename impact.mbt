@@ -72,8 +72,8 @@ fn before_revision(
 /// later revisions; they do not affect this historical impact calculation.
 pub fn Ledger::impact_of_revision(
   self : Ledger,
-  index : Int,
-  max_segments? : Int = 4096,
+  index : Int32,
+  max_segments~ : Int32 = 4096,
 ) -> Array[Impact] raise TemporalError {
   if max_segments <= 0 {
     raise TooManySegments(maximum=max_segments)

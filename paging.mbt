@@ -3,9 +3,9 @@
 /// request next, or `None` when this page reaches the end of the sequence.
 pub struct RevisionPage {
   items : Array[Revision]
-  offset : Int
-  total : Int
-  next_offset : Int?
+  offset : Int32
+  total : Int32
+  next_offset : Int32?
 }
 
 ///|
@@ -14,17 +14,17 @@ pub fn RevisionPage::items(self : RevisionPage) -> Array[Revision] {
 }
 
 ///|
-pub fn RevisionPage::offset(self : RevisionPage) -> Int {
+pub fn RevisionPage::offset(self : RevisionPage) -> Int32 {
   self.offset
 }
 
 ///|
-pub fn RevisionPage::total(self : RevisionPage) -> Int {
+pub fn RevisionPage::total(self : RevisionPage) -> Int32 {
   self.total
 }
 
 ///|
-pub fn RevisionPage::next_offset(self : RevisionPage) -> Int? {
+pub fn RevisionPage::next_offset(self : RevisionPage) -> Int32? {
   self.next_offset
 }
 
@@ -34,7 +34,7 @@ pub fn RevisionPage::is_empty(self : RevisionPage) -> Bool {
 }
 
 ///|
-fn validate_page(offset : Int, max_items : Int) -> Unit raise TemporalError {
+fn validate_page(offset : Int32, max_items : Int32) -> Unit raise TemporalError {
   if offset < 0 {
     raise InvalidPage("offset must be non-negative")
   }
@@ -44,7 +44,7 @@ fn validate_page(offset : Int, max_items : Int) -> Unit raise TemporalError {
 }
 
 ///|
-fn page_end(offset : Int, max_items : Int, total : Int) -> Int {
+fn page_end(offset : Int32, max_items : Int32, total : Int32) -> Int32 {
   if offset >= total {
     total
   } else if max_items >= total - offset {
@@ -58,8 +58,8 @@ fn page_end(offset : Int, max_items : Int, total : Int) -> Int {
 /// Page through the full append log without copying unrelated revisions.
 pub fn Ledger::page(
   self : Ledger,
-  offset : Int,
-  max_items : Int,
+  offset : Int32,
+  max_items : Int32,
 ) -> RevisionPage raise TemporalError {
   validate_page(offset, max_items)
   let total = self.revisions.length()
@@ -80,8 +80,8 @@ pub fn Ledger::page(
 pub fn Ledger::history_page(
   self : Ledger,
   key : String,
-  offset : Int,
-  max_items : Int,
+  offset : Int32,
+  max_items : Int32,
 ) -> RevisionPage raise TemporalError {
   validate_page(offset, max_items)
   let positions = match self.index.get(key) {

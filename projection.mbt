@@ -56,7 +56,7 @@ pub fn Ledger::select_keys(self : Ledger, keys : Array[String]) -> Ledger {
 
 ///|
 /// The number of revisions about a key, independent of current visibility.
-pub fn Ledger::history_count(self : Ledger, key : String) -> Int {
+pub fn Ledger::history_count(self : Ledger, key : String) -> Int32 {
   match self.index.get(key) {
     Some(positions) => positions.length()
     None => 0

@@ -45,7 +45,7 @@ pub fn DecisionTrace::truncated(self : DecisionTrace) -> Bool {
 }
 
 ///|
-pub fn DecisionTrace::superseded_count(self : DecisionTrace) -> Int {
+pub fn DecisionTrace::superseded_count(self : DecisionTrace) -> Int32 {
   if self.candidates.is_empty() {
     0
   } else {
@@ -61,7 +61,7 @@ pub fn Ledger::trace(
   key : String,
   valid_at : Int64,
   known_at : Int64,
-  max_candidates? : Int = 64,
+  max_candidates~ : Int32 = 64,
 ) -> DecisionTrace raise TemporalError {
   if max_candidates <= 0 {
     raise TooManyRevisions(maximum=max_candidates)

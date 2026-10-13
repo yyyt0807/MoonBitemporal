@@ -4,10 +4,10 @@
 /// `@json.parse`; this scanner enforces resource limits and key uniqueness.
 priv struct JsonGuard {
   text : String
-  mut offset : Int
-  mut nodes : Int
-  max_nodes : Int
-  max_depth : Int
+  mut offset : Int32
+  mut nodes : Int32
+  max_nodes : Int32
+  max_depth : Int32
 }
 
 ///|
@@ -21,12 +21,12 @@ fn JsonGuard::skip_space(self : JsonGuard) -> Unit {
 }
 
 ///|
-fn JsonGuard::at(self : JsonGuard, ascii : Int) -> Bool {
+fn JsonGuard::at(self : JsonGuard, ascii : Int32) -> Bool {
   self.offset < self.text.length() && self.text[self.offset].to_int() == ascii
 }
 
 ///|
-fn JsonGuard::consume(self : JsonGuard, ascii : Int) -> Bool {
+fn JsonGuard::consume(self : JsonGuard, ascii : Int32) -> Bool {
   if self.at(ascii) {
     self.offset = self.offset + 1
     true
@@ -65,7 +65,7 @@ fn JsonGuard::quoted(self : JsonGuard) -> String raise TemporalError {
 ///|
 fn JsonGuard::scan_object(
   self : JsonGuard,
-  depth : Int,
+  depth : Int32,
 ) -> Unit raise TemporalError {
   ignore(self.consume(123))
   self.skip_space()
@@ -98,7 +98,7 @@ fn JsonGuard::scan_object(
 ///|
 fn JsonGuard::scan_array(
   self : JsonGuard,
-  depth : Int,
+  depth : Int32,
 ) -> Unit raise TemporalError {
   ignore(self.consume(91))
   self.skip_space()
@@ -142,7 +142,7 @@ fn JsonGuard::scan_atom(self : JsonGuard) -> Unit raise TemporalError {
 ///|
 fn JsonGuard::scan_value(
   self : JsonGuard,
-  depth : Int,
+  depth : Int32,
 ) -> Unit raise TemporalError {
   if depth > self.max_depth {
     raise InvalidArchive("JSON nesting limit exceeded")

@@ -19,7 +19,7 @@ pub fn KeyChangeReport::fragments(
 }
 
 ///|
-pub fn KeyChangeReport::fragment_count(self : KeyChangeReport) -> Int {
+pub fn KeyChangeReport::fragment_count(self : KeyChangeReport) -> Int32 {
   self.fragments.length()
 }
 
@@ -29,8 +29,8 @@ pub fn KeyChangeReport::fragment_count(self : KeyChangeReport) -> Int {
 /// differs on at least one valid-time fragment.
 pub struct ChangeReport {
   entries : Array[KeyChangeReport]
-  keys_examined : Int
-  fragments : Int
+  keys_examined : Int32
+  fragments : Int32
   bounds : Span
   before_known : Int64
   after_known : Int64
@@ -42,17 +42,17 @@ pub fn ChangeReport::entries(self : ChangeReport) -> Array[KeyChangeReport] {
 }
 
 ///|
-pub fn ChangeReport::keys_examined(self : ChangeReport) -> Int {
+pub fn ChangeReport::keys_examined(self : ChangeReport) -> Int32 {
   self.keys_examined
 }
 
 ///|
-pub fn ChangeReport::keys_changed(self : ChangeReport) -> Int {
+pub fn ChangeReport::keys_changed(self : ChangeReport) -> Int32 {
   self.entries.length()
 }
 
 ///|
-pub fn ChangeReport::fragment_count(self : ChangeReport) -> Int {
+pub fn ChangeReport::fragment_count(self : ChangeReport) -> Int32 {
   self.fragments
 }
 
@@ -80,7 +80,7 @@ pub fn ChangeReport::is_empty(self : ChangeReport) -> Bool {
 fn union_ledger_keys(
   before : Ledger,
   after : Ledger,
-  max_keys : Int,
+  max_keys : Int32,
 ) -> Array[String] raise TemporalError {
   if max_keys < 0 {
     raise TooManyKeys(maximum=max_keys)
@@ -112,8 +112,8 @@ pub fn compare_all_keys(
   bounds : Span,
   before_known : Int64,
   after_known : Int64,
-  max_keys? : Int = 10000,
-  max_fragments? : Int = 10000,
+  max_keys~ : Int32 = 10000,
+  max_fragments~ : Int32 = 10000,
 ) -> ChangeReport raise TemporalError {
   if max_fragments <= 0 {
     raise TooManySegments(maximum=max_fragments)
@@ -157,8 +157,8 @@ pub fn Ledger::change_report(
   bounds : Span,
   before_known : Int64,
   after_known : Int64,
-  max_keys? : Int = 10000,
-  max_fragments? : Int = 10000,
+  max_keys~ : Int32 = 10000,
+  max_fragments~ : Int32 = 10000,
 ) -> ChangeReport raise TemporalError {
   compare_all_keys(
     self,

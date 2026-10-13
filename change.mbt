@@ -38,7 +38,7 @@ pub struct Revision {
   valid : Span
   known_at : Int64
   value : String?
-  sequence : Int
+  sequence : Int32
 }
 
 ///|
@@ -62,6 +62,6 @@ pub fn Revision::value(self : Revision) -> String? {
 }
 
 ///|
-pub fn Revision::sequence(self : Revision) -> Int {
+pub fn Revision::sequence(self : Revision) -> Int32 {
   self.sequence
 }

@@ -28,7 +28,7 @@ pub fn SnapshotSegment::value(self : SnapshotSegment, key : String) -> String? {
 ///|
 fn unique_query_keys(
   keys : Array[String],
-  max_keys : Int,
+  max_keys : Int32,
 ) -> Array[String] raise TemporalError {
   if max_keys < 0 {
     raise TooManyKeys(maximum=max_keys)
@@ -56,8 +56,8 @@ pub fn Ledger::snapshot_timeline(
   keys : Array[String],
   bounds : Span,
   known_at : Int64,
-  max_keys? : Int = 64,
-  max_segments? : Int = 4096,
+  max_keys~ : Int32 = 64,
+  max_segments~ : Int32 = 4096,
 ) -> Array[SnapshotSegment] raise TemporalError {
   if max_segments <= 0 {
     raise TooManySegments(maximum=max_segments)

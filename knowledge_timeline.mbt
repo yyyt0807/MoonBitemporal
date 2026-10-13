@@ -42,7 +42,7 @@ pub fn Ledger::knowledge_timeline(
   key : String,
   valid_at : Int64,
   bounds : Span,
-  max_segments? : Int = 4096,
+  max_segments~ : Int32 = 4096,
 ) -> Array[KnowledgeSegment] raise TemporalError {
   if max_segments <= 0 {
     raise TooManySegments(maximum=max_segments)

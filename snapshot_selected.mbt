@@ -8,7 +8,7 @@ pub fn Ledger::snapshot_selected(
   keys : Array[String],
   valid_at : Int64,
   known_at : Int64,
-  max_keys? : Int = 1024,
+  max_keys~ : Int32 = 1024,
 ) -> Array[Fact] raise TemporalError {
   let selected = unique_query_keys(keys, max_keys)
   let result : Array[Fact] = []

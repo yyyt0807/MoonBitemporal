@@ -28,8 +28,8 @@ pub fn BatchPage::has_more(self : BatchPage) -> Bool {
 pub fn Ledger::batches_since(
   self : Ledger,
   known_after : Int64?,
-  max_batches? : Int = 128,
-  max_revisions? : Int = 4096,
+  max_batches~ : Int32 = 128,
+  max_revisions~ : Int32 = 4096,
 ) -> BatchPage raise TemporalError {
   validate_page(0, max_batches)
   if max_revisions <= 0 {

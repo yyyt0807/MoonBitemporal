@@ -2,39 +2,39 @@
 /// Aggregate operational metadata. Values and keys are not included except
 /// for the most revised key, so callers can log counts separately from data.
 pub struct LedgerStats {
-  revisions : Int
-  keys : Int
-  batches : Int
-  tombstones : Int
-  open_valid_spans : Int
+  revisions : Int32
+  keys : Int32
+  batches : Int32
+  tombstones : Int32
+  open_valid_spans : Int32
   most_revised_key : String?
-  most_revisions_for_key : Int
+  most_revisions_for_key : Int32
   first_knowledge_time : Int64?
   latest_knowledge_time : Int64?
 }
 
 ///|
-pub fn LedgerStats::revisions(self : LedgerStats) -> Int {
+pub fn LedgerStats::revisions(self : LedgerStats) -> Int32 {
   self.revisions
 }
 
 ///|
-pub fn LedgerStats::keys(self : LedgerStats) -> Int {
+pub fn LedgerStats::keys(self : LedgerStats) -> Int32 {
   self.keys
 }
 
 ///|
-pub fn LedgerStats::batches(self : LedgerStats) -> Int {
+pub fn LedgerStats::batches(self : LedgerStats) -> Int32 {
   self.batches
 }
 
 ///|
-pub fn LedgerStats::tombstones(self : LedgerStats) -> Int {
+pub fn LedgerStats::tombstones(self : LedgerStats) -> Int32 {
   self.tombstones
 }
 
 ///|
-pub fn LedgerStats::open_valid_spans(self : LedgerStats) -> Int {
+pub fn LedgerStats::open_valid_spans(self : LedgerStats) -> Int32 {
   self.open_valid_spans
 }
 
@@ -44,7 +44,7 @@ pub fn LedgerStats::most_revised_key(self : LedgerStats) -> String? {
 }
 
 ///|
-pub fn LedgerStats::most_revisions_for_key(self : LedgerStats) -> Int {
+pub fn LedgerStats::most_revisions_for_key(self : LedgerStats) -> Int32 {
   self.most_revisions_for_key
 }
 
@@ -61,7 +61,7 @@ pub fn LedgerStats::latest_knowledge_time(self : LedgerStats) -> Int64? {
 ///|
 /// Scan the append log once for statistics useful to storage adapters.
 pub fn Ledger::stats(self : Ledger) -> LedgerStats {
-  let counts : Map[String, Int] = Map([])
+  let counts : Map[String, Int32] = Map([])
   let mut batches = 0
   let mut tombstones = 0
   let mut open_valid_spans = 0
