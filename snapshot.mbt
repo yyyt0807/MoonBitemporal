@@ -25,17 +25,11 @@ pub fn Fact::source(self : Fact) -> Revision {
 /// Every distinct key in deterministic lexical order, including deleted keys.
 pub fn Ledger::keys(self : Ledger) -> Array[String] {
   let values : Array[String] = []
-  for revision in self.revisions {
-    values.push(revision.key)
+  for key, _ in self.index {
+    values.push(key)
   }
   values.sort_by(fn(a, b) { a.lexical_compare(b) })
-  let unique : Array[String] = []
-  for key in values {
-    if unique.is_empty() || unique[unique.length() - 1] != key {
-      unique.push(key)
-    }
-  }
-  unique
+  values
 }
 
 ///|
