@@ -18,6 +18,8 @@ pub(all) suberror TemporalError {
   InvalidPage(String)
   DivergentHistory(index~ : Int32)
   TooManyCells(maximum~ : Int32)
+  InvalidDecision(String)
+  TooManyDecisions(maximum~ : Int32)
 }
 
 ///|
@@ -40,5 +42,7 @@ pub fn TemporalError::code(self : TemporalError) -> String {
     InvalidPage(_) => "TEMPORAL_INVALID_PAGE"
     DivergentHistory(..) => "TEMPORAL_DIVERGENT_HISTORY"
     TooManyCells(..) => "TEMPORAL_CELL_LIMIT"
+    InvalidDecision(_) => "TEMPORAL_INVALID_DECISION"
+    TooManyDecisions(..) => "TEMPORAL_DECISION_LIMIT"
   }
 }

@@ -55,13 +55,28 @@ pub fn Ledger::timeline(
   known_at : Int64,
   max_segments~ : Int32 = 4096,
 ) -> Array[Segment] raise TemporalError {
+  self.timeline_at(key, bounds, known_at, true, max_segments)
+}
+
+///|
+/// Strict eligibility also supports a view immediately before a commit,
+/// including a commit at Int64 minimum, without timestamp subtraction.
+fn Ledger::timeline_at(
+  self : Ledger,
+  key : String,
+  bounds : Span,
+  known_at : Int64,
+  inclusive : Bool,
+  max_segments : Int32,
+) -> Array[Segment] raise TemporalError {
   if max_segments <= 0 {
     raise TooManySegments(maximum=max_segments)
   }
   let points : Array[Int64] = [bounds.start]
   let events : Array[TimelineEvent] = []
   for revision in self.history(key) {
-    if revision.known_at <= known_at {
+    if revision.known_at < known_at ||
+      (inclusive && revision.known_at == known_at) {
       match revision.valid.intersection(bounds) {
         Some(part) => {
           events.push({ start: part.start, end: part.end, source: revision, })

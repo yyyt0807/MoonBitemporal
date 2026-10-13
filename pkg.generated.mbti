@@ -33,6 +33,8 @@ pub(all) suberror TemporalError {
   InvalidPage(String)
   DivergentHistory(index~ : Int)
   TooManyCells(maximum~ : Int)
+  InvalidDecision(String)
+  TooManyDecisions(maximum~ : Int)
 }
 pub fn TemporalError::code(Self) -> String
 
@@ -100,6 +102,32 @@ pub fn Coverage::total(Self) -> Int64
 pub fn Coverage::unclaimed(Self) -> Int64
 pub fn Coverage::values(Self) -> Array[ValueDuration]
 pub fn Coverage::withdrawn(Self) -> Int64
+
+pub struct DecisionAudit {
+  decision : DecisionEvidence
+  review_known : Int64
+  current : Revision?
+}
+pub fn DecisionAudit::current(Self) -> Revision?
+pub fn DecisionAudit::decision(Self) -> DecisionEvidence
+pub fn DecisionAudit::needs_recompute(Self) -> Bool
+pub fn DecisionAudit::provenance_changed(Self) -> Bool
+pub fn DecisionAudit::review_known(Self) -> Int64
+pub fn DecisionAudit::to_json(Self) -> Json
+
+pub struct DecisionEvidence {
+  id : String
+  key : String
+  valid_at : Int64
+  known_at : Int64
+  source : Revision?
+}
+pub fn DecisionEvidence::id(Self) -> String
+pub fn DecisionEvidence::key(Self) -> String
+pub fn DecisionEvidence::known_at(Self) -> Int64
+pub fn DecisionEvidence::source(Self) -> Revision?
+pub fn DecisionEvidence::valid_at(Self) -> Int64
+pub fn DecisionEvidence::value(Self) -> String?
 
 pub struct DecisionTrace {
   key : String
@@ -178,8 +206,10 @@ pub fn Ledger::append_json(Self, Json) -> Self raise TemporalError
 pub fn Ledger::append_json_string(Self, String, max_chars? : Int) -> Self raise TemporalError
 pub fn Ledger::append_ledger(Self, Self) -> Self raise TemporalError
 pub fn Ledger::as_known_at(Self, Int64) -> Self
+pub fn Ledger::audit_decisions(Self, Array[DecisionEvidence], Int64, max_decisions? : Int) -> Array[DecisionAudit] raise TemporalError
 pub fn Ledger::batch_at(Self, Int64) -> KnowledgeBatch?
 pub fn Ledger::batches_since(Self, Int64?, max_batches? : Int, max_revisions? : Int) -> BatchPage raise TemporalError
+pub fn Ledger::capture_decision(Self, String, String, Int64, Int64) -> DecisionEvidence raise TemporalError
 pub fn Ledger::change_report(Self, Span, Int64, Int64, max_keys? : Int, max_fragments? : Int) -> ChangeReport raise TemporalError
 pub fn Ledger::commit(Self, Int64, Array[Change]) -> Self raise TemporalError
 pub fn Ledger::commit_with_report(Self, Int64, Array[Change], max_impacts? : Int) -> CommitReport raise TemporalError
@@ -214,6 +244,7 @@ pub fn Ledger::snapshot(Self, Int64, Int64) -> Array[Fact]
 pub fn Ledger::snapshot_selected(Self, Array[String], Int64, Int64, max_keys? : Int) -> Array[Fact] raise TemporalError
 pub fn Ledger::snapshot_timeline(Self, Array[String], Span, Int64, max_keys? : Int, max_segments? : Int) -> Array[SnapshotSegment] raise TemporalError
 pub fn Ledger::stats(Self) -> LedgerStats
+pub fn Ledger::supersession_fragments(Self, Int, max_fragments? : Int) -> Array[SupersessionFragment] raise TemporalError
 pub fn Ledger::timeline(Self, String, Span, Int64, max_segments? : Int) -> Array[Segment] raise TemporalError
 pub fn Ledger::to_json(Self) -> Json
 pub fn Ledger::to_json_since(Self, Int64) -> Json
@@ -338,6 +369,17 @@ pub(all) enum SpanFilter {
   Withdrawn
   Unclaimed
 }
+
+pub struct SupersessionFragment {
+  valid : Span
+  previous : Revision?
+  replacement : Revision
+}
+pub fn SupersessionFragment::previous(Self) -> Revision?
+pub fn SupersessionFragment::replacement(Self) -> Revision
+pub fn SupersessionFragment::to_json(Self) -> Json
+pub fn SupersessionFragment::valid(Self) -> Span
+pub fn SupersessionFragment::value_changed(Self) -> Bool
 
 pub struct TemporalMatrix {
   key : String
