@@ -15,9 +15,9 @@ lines = ["// Generated from actual Rust bitemporal-runtime 0.1.0 outputs.",
          "// Regenerate with tools/generate_reference_tests.py; excluded from handwritten LOC."]
 for index, case in enumerate(data["cases"]):
     lines += ["", "///|", f'test "Rust reference shared open-span semantics case {index}" {{',
-              "  let builder = try! LedgerBuilder::new()"]
+              "  let builder = try! @moonbitemporal.LedgerBuilder::new()"]
     for record in case["records"]:
-        lines += [f'  builder.append({record["known"]}L, [Change::put({text(record["key"])}, Span::open({record["valid"]}L), {text(record["value"])})])']
+        lines += [f'  builder.append({record["known"]}L, [@moonbitemporal.Change::put({text(record["key"])}, @moonbitemporal.Span::open({record["valid"]}L), {text(record["value"])})])']
     lines += ["  let ledger = builder.freeze()"]
     keys = sorted({r["key"] for r in case["records"]})
     for query in case["queries"]:

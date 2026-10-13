@@ -1,0 +1,2593 @@
+{
+  "cases": [
+    {
+      "queries": [
+        {
+          "facts": [],
+          "known": -1,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 1,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 7,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 25,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 80,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 200,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 7,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 25,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 80,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 200,
+          "valid": -10
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 7,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            }
+          ],
+          "known": 25,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            }
+          ],
+          "known": 80,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            }
+          ],
+          "known": 200,
+          "valid": 0
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 7,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            }
+          ],
+          "known": 80,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            }
+          ],
+          "known": 200,
+          "valid": 10
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 7,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 80,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 200,
+          "valid": 20
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 80,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 200,
+          "valid": 30
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 80,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 200,
+          "valid": 31
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 80,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 200,
+          "valid": 60
+        }
+      ],
+      "records": [
+        {
+          "key": "key-0",
+          "known": 1,
+          "valid": -10,
+          "value": "value-0"
+        },
+        {
+          "key": "key-0",
+          "known": 4,
+          "valid": 7,
+          "value": "value-1"
+        },
+        {
+          "key": "key-0",
+          "known": 7,
+          "valid": 24,
+          "value": "value-2"
+        },
+        {
+          "key": "key-0",
+          "known": 10,
+          "valid": 0,
+          "value": "value-3"
+        },
+        {
+          "key": "key-0",
+          "known": 13,
+          "valid": 17,
+          "value": "value-4"
+        },
+        {
+          "key": "key-0",
+          "known": 16,
+          "valid": -7,
+          "value": "value-5"
+        },
+        {
+          "key": "key-0",
+          "known": 19,
+          "valid": 10,
+          "value": "value-6"
+        },
+        {
+          "key": "key-0",
+          "known": 22,
+          "valid": 27,
+          "value": "value-0"
+        },
+        {
+          "key": "key-0",
+          "known": 25,
+          "valid": 3,
+          "value": "value-1"
+        },
+        {
+          "key": "key-0",
+          "known": 28,
+          "valid": 20,
+          "value": "value-2"
+        },
+        {
+          "key": "key-0",
+          "known": 31,
+          "valid": -4,
+          "value": "value-3"
+        },
+        {
+          "key": "key-0",
+          "known": 34,
+          "valid": 13,
+          "value": "value-4"
+        }
+      ],
+      "referenceReceiptCount": 66,
+      "snapshots": [
+        {
+          "facts": [],
+          "known": -1
+        },
+        {
+          "facts": [],
+          "known": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 7
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            }
+          ],
+          "known": 25
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 80
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            }
+          ],
+          "known": 200
+        }
+      ]
+    },
+    {
+      "queries": [
+        {
+          "facts": [],
+          "known": -1,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 1,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 7,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 25,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 80,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 200,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 7,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 25,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 80,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 200,
+          "valid": -10
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 7,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            },
+            {
+              "key": "key-2",
+              "value": "value-5"
+            }
+          ],
+          "known": 25,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-3"
+            }
+          ],
+          "known": 80,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 200,
+          "valid": 0
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            }
+          ],
+          "known": 7,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-6"
+            }
+          ],
+          "known": 80,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 200,
+          "valid": 10
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            }
+          ],
+          "known": 7,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            }
+          ],
+          "known": 80,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 200,
+          "valid": 20
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-5"
+            }
+          ],
+          "known": 80,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 200,
+          "valid": 30
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-5"
+            }
+          ],
+          "known": 80,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 200,
+          "valid": 31
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-5"
+            }
+          ],
+          "known": 80,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 200,
+          "valid": 60
+        }
+      ],
+      "records": [
+        {
+          "key": "key-0",
+          "known": 1,
+          "valid": -10,
+          "value": "value-0"
+        },
+        {
+          "key": "key-1",
+          "known": 4,
+          "valid": 7,
+          "value": "value-1"
+        },
+        {
+          "key": "key-2",
+          "known": 7,
+          "valid": 24,
+          "value": "value-2"
+        },
+        {
+          "key": "key-0",
+          "known": 10,
+          "valid": 0,
+          "value": "value-3"
+        },
+        {
+          "key": "key-1",
+          "known": 13,
+          "valid": 17,
+          "value": "value-4"
+        },
+        {
+          "key": "key-2",
+          "known": 16,
+          "valid": -7,
+          "value": "value-5"
+        },
+        {
+          "key": "key-0",
+          "known": 19,
+          "valid": 10,
+          "value": "value-6"
+        },
+        {
+          "key": "key-1",
+          "known": 22,
+          "valid": 27,
+          "value": "value-0"
+        },
+        {
+          "key": "key-2",
+          "known": 25,
+          "valid": 3,
+          "value": "value-1"
+        },
+        {
+          "key": "key-0",
+          "known": 28,
+          "valid": 20,
+          "value": "value-2"
+        },
+        {
+          "key": "key-1",
+          "known": 31,
+          "valid": -4,
+          "value": "value-3"
+        },
+        {
+          "key": "key-2",
+          "known": 34,
+          "valid": 13,
+          "value": "value-4"
+        },
+        {
+          "key": "key-0",
+          "known": 37,
+          "valid": 30,
+          "value": "value-5"
+        },
+        {
+          "key": "key-1",
+          "known": 40,
+          "valid": 6,
+          "value": "value-6"
+        },
+        {
+          "key": "key-2",
+          "known": 43,
+          "valid": 23,
+          "value": "value-0"
+        },
+        {
+          "key": "key-0",
+          "known": 46,
+          "valid": -1,
+          "value": "value-1"
+        },
+        {
+          "key": "key-1",
+          "known": 49,
+          "valid": 16,
+          "value": "value-2"
+        },
+        {
+          "key": "key-2",
+          "known": 52,
+          "valid": -8,
+          "value": "value-3"
+        },
+        {
+          "key": "key-0",
+          "known": 55,
+          "valid": 9,
+          "value": "value-4"
+        },
+        {
+          "key": "key-1",
+          "known": 58,
+          "valid": 26,
+          "value": "value-5"
+        },
+        {
+          "key": "key-2",
+          "known": 61,
+          "valid": 2,
+          "value": "value-6"
+        },
+        {
+          "key": "key-0",
+          "known": 64,
+          "valid": 19,
+          "value": "value-0"
+        },
+        {
+          "key": "key-1",
+          "known": 67,
+          "valid": -5,
+          "value": "value-1"
+        },
+        {
+          "key": "key-2",
+          "known": 70,
+          "valid": 12,
+          "value": "value-2"
+        },
+        {
+          "key": "key-0",
+          "known": 73,
+          "valid": 29,
+          "value": "value-3"
+        },
+        {
+          "key": "key-1",
+          "known": 76,
+          "valid": 5,
+          "value": "value-4"
+        },
+        {
+          "key": "key-2",
+          "known": 79,
+          "valid": 22,
+          "value": "value-5"
+        },
+        {
+          "key": "key-0",
+          "known": 82,
+          "valid": -2,
+          "value": "value-6"
+        },
+        {
+          "key": "key-1",
+          "known": 85,
+          "valid": 15,
+          "value": "value-0"
+        },
+        {
+          "key": "key-2",
+          "known": 88,
+          "valid": -9,
+          "value": "value-1"
+        }
+      ],
+      "referenceReceiptCount": 135,
+      "snapshots": [
+        {
+          "facts": [],
+          "known": -1
+        },
+        {
+          "facts": [],
+          "known": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            }
+          ],
+          "known": 7
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 25
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-3"
+            },
+            {
+              "key": "key-1",
+              "value": "value-4"
+            },
+            {
+              "key": "key-2",
+              "value": "value-5"
+            }
+          ],
+          "known": 80
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            }
+          ],
+          "known": 200
+        }
+      ]
+    },
+    {
+      "queries": [
+        {
+          "facts": [],
+          "known": -1,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 1,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 7,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 25,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 80,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": 200,
+          "valid": -11
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 7,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 25,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 80,
+          "valid": -10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            }
+          ],
+          "known": 200,
+          "valid": -10
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 7,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            },
+            {
+              "key": "key-3",
+              "value": "value-3"
+            }
+          ],
+          "known": 25,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-3"
+            }
+          ],
+          "known": 80,
+          "valid": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-6"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-2"
+            }
+          ],
+          "known": 200,
+          "valid": 0
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            }
+          ],
+          "known": 7,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            },
+            {
+              "key": "key-3",
+              "value": "value-1"
+            }
+          ],
+          "known": 25,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-4"
+            }
+          ],
+          "known": 80,
+          "valid": 10
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-2"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-5"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 200,
+          "valid": 10
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            }
+          ],
+          "known": 7,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            },
+            {
+              "key": "key-3",
+              "value": "value-1"
+            },
+            {
+              "key": "key-4",
+              "value": "value-4"
+            }
+          ],
+          "known": 25,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-2"
+            }
+          ],
+          "known": 80,
+          "valid": 20
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-1"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 200,
+          "valid": 20
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            },
+            {
+              "key": "key-2",
+              "value": "value-0"
+            },
+            {
+              "key": "key-3",
+              "value": "value-1"
+            },
+            {
+              "key": "key-4",
+              "value": "value-4"
+            }
+          ],
+          "known": 25,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            },
+            {
+              "key": "key-1",
+              "value": "value-5"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 80,
+          "valid": 30
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 200,
+          "valid": 30
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            },
+            {
+              "key": "key-2",
+              "value": "value-0"
+            },
+            {
+              "key": "key-3",
+              "value": "value-1"
+            },
+            {
+              "key": "key-4",
+              "value": "value-4"
+            }
+          ],
+          "known": 25,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            },
+            {
+              "key": "key-1",
+              "value": "value-5"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 80,
+          "valid": 31
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 200,
+          "valid": 31
+        },
+        {
+          "facts": [],
+          "known": -1,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            }
+          ],
+          "known": 7,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            },
+            {
+              "key": "key-2",
+              "value": "value-0"
+            },
+            {
+              "key": "key-3",
+              "value": "value-1"
+            },
+            {
+              "key": "key-4",
+              "value": "value-4"
+            }
+          ],
+          "known": 25,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            },
+            {
+              "key": "key-1",
+              "value": "value-5"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 80,
+          "valid": 60
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 200,
+          "valid": 60
+        }
+      ],
+      "records": [
+        {
+          "key": "key-0",
+          "known": 1,
+          "valid": -10,
+          "value": "value-0"
+        },
+        {
+          "key": "key-1",
+          "known": 4,
+          "valid": 7,
+          "value": "value-1"
+        },
+        {
+          "key": "key-2",
+          "known": 7,
+          "valid": 24,
+          "value": "value-2"
+        },
+        {
+          "key": "key-3",
+          "known": 10,
+          "valid": 0,
+          "value": "value-3"
+        },
+        {
+          "key": "key-4",
+          "known": 13,
+          "valid": 17,
+          "value": "value-4"
+        },
+        {
+          "key": "key-0",
+          "known": 16,
+          "valid": -7,
+          "value": "value-5"
+        },
+        {
+          "key": "key-1",
+          "known": 19,
+          "valid": 10,
+          "value": "value-6"
+        },
+        {
+          "key": "key-2",
+          "known": 22,
+          "valid": 27,
+          "value": "value-0"
+        },
+        {
+          "key": "key-3",
+          "known": 25,
+          "valid": 3,
+          "value": "value-1"
+        },
+        {
+          "key": "key-4",
+          "known": 28,
+          "valid": 20,
+          "value": "value-2"
+        },
+        {
+          "key": "key-0",
+          "known": 31,
+          "valid": -4,
+          "value": "value-3"
+        },
+        {
+          "key": "key-1",
+          "known": 34,
+          "valid": 13,
+          "value": "value-4"
+        },
+        {
+          "key": "key-2",
+          "known": 37,
+          "valid": 30,
+          "value": "value-5"
+        },
+        {
+          "key": "key-3",
+          "known": 40,
+          "valid": 6,
+          "value": "value-6"
+        },
+        {
+          "key": "key-4",
+          "known": 43,
+          "valid": 23,
+          "value": "value-0"
+        },
+        {
+          "key": "key-0",
+          "known": 46,
+          "valid": -1,
+          "value": "value-1"
+        },
+        {
+          "key": "key-1",
+          "known": 49,
+          "valid": 16,
+          "value": "value-2"
+        },
+        {
+          "key": "key-2",
+          "known": 52,
+          "valid": -8,
+          "value": "value-3"
+        },
+        {
+          "key": "key-3",
+          "known": 55,
+          "valid": 9,
+          "value": "value-4"
+        },
+        {
+          "key": "key-4",
+          "known": 58,
+          "valid": 26,
+          "value": "value-5"
+        },
+        {
+          "key": "key-0",
+          "known": 61,
+          "valid": 2,
+          "value": "value-6"
+        },
+        {
+          "key": "key-1",
+          "known": 64,
+          "valid": 19,
+          "value": "value-0"
+        },
+        {
+          "key": "key-2",
+          "known": 67,
+          "valid": -5,
+          "value": "value-1"
+        },
+        {
+          "key": "key-3",
+          "known": 70,
+          "valid": 12,
+          "value": "value-2"
+        },
+        {
+          "key": "key-4",
+          "known": 73,
+          "valid": 29,
+          "value": "value-3"
+        },
+        {
+          "key": "key-0",
+          "known": 76,
+          "valid": 5,
+          "value": "value-4"
+        },
+        {
+          "key": "key-1",
+          "known": 79,
+          "valid": 22,
+          "value": "value-5"
+        },
+        {
+          "key": "key-2",
+          "known": 82,
+          "valid": -2,
+          "value": "value-6"
+        },
+        {
+          "key": "key-3",
+          "known": 85,
+          "valid": 15,
+          "value": "value-0"
+        },
+        {
+          "key": "key-4",
+          "known": 88,
+          "valid": -9,
+          "value": "value-1"
+        },
+        {
+          "key": "key-0",
+          "known": 91,
+          "valid": 8,
+          "value": "value-2"
+        },
+        {
+          "key": "key-1",
+          "known": 94,
+          "valid": 25,
+          "value": "value-3"
+        },
+        {
+          "key": "key-2",
+          "known": 97,
+          "valid": 1,
+          "value": "value-4"
+        },
+        {
+          "key": "key-3",
+          "known": 100,
+          "valid": 18,
+          "value": "value-5"
+        },
+        {
+          "key": "key-4",
+          "known": 103,
+          "valid": -6,
+          "value": "value-6"
+        },
+        {
+          "key": "key-0",
+          "known": 106,
+          "valid": 11,
+          "value": "value-0"
+        },
+        {
+          "key": "key-1",
+          "known": 109,
+          "valid": 28,
+          "value": "value-1"
+        },
+        {
+          "key": "key-2",
+          "known": 112,
+          "valid": 4,
+          "value": "value-2"
+        },
+        {
+          "key": "key-3",
+          "known": 115,
+          "valid": 21,
+          "value": "value-3"
+        },
+        {
+          "key": "key-4",
+          "known": 118,
+          "valid": -3,
+          "value": "value-4"
+        },
+        {
+          "key": "key-0",
+          "known": 121,
+          "valid": 14,
+          "value": "value-5"
+        },
+        {
+          "key": "key-1",
+          "known": 124,
+          "valid": -10,
+          "value": "value-6"
+        },
+        {
+          "key": "key-2",
+          "known": 127,
+          "valid": 7,
+          "value": "value-0"
+        },
+        {
+          "key": "key-3",
+          "known": 130,
+          "valid": 24,
+          "value": "value-1"
+        },
+        {
+          "key": "key-4",
+          "known": 133,
+          "valid": 0,
+          "value": "value-2"
+        },
+        {
+          "key": "key-0",
+          "known": 136,
+          "valid": 17,
+          "value": "value-3"
+        },
+        {
+          "key": "key-1",
+          "known": 139,
+          "valid": -7,
+          "value": "value-4"
+        },
+        {
+          "key": "key-2",
+          "known": 142,
+          "valid": 10,
+          "value": "value-5"
+        },
+        {
+          "key": "key-3",
+          "known": 145,
+          "valid": 27,
+          "value": "value-6"
+        },
+        {
+          "key": "key-4",
+          "known": 148,
+          "valid": 3,
+          "value": "value-0"
+        },
+        {
+          "key": "key-0",
+          "known": 151,
+          "valid": 20,
+          "value": "value-1"
+        },
+        {
+          "key": "key-1",
+          "known": 154,
+          "valid": -4,
+          "value": "value-2"
+        },
+        {
+          "key": "key-2",
+          "known": 157,
+          "valid": 13,
+          "value": "value-3"
+        },
+        {
+          "key": "key-3",
+          "known": 160,
+          "valid": 30,
+          "value": "value-4"
+        },
+        {
+          "key": "key-4",
+          "known": 163,
+          "valid": 6,
+          "value": "value-5"
+        },
+        {
+          "key": "key-0",
+          "known": 166,
+          "valid": 23,
+          "value": "value-6"
+        },
+        {
+          "key": "key-1",
+          "known": 169,
+          "valid": -1,
+          "value": "value-0"
+        },
+        {
+          "key": "key-2",
+          "known": 172,
+          "valid": 16,
+          "value": "value-1"
+        },
+        {
+          "key": "key-3",
+          "known": 175,
+          "valid": -8,
+          "value": "value-2"
+        },
+        {
+          "key": "key-4",
+          "known": 178,
+          "valid": 9,
+          "value": "value-3"
+        }
+      ],
+      "referenceReceiptCount": 330,
+      "snapshots": [
+        {
+          "facts": [],
+          "known": -1
+        },
+        {
+          "facts": [],
+          "known": 0
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            }
+          ],
+          "known": 1
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-0"
+            },
+            {
+              "key": "key-1",
+              "value": "value-1"
+            }
+          ],
+          "known": 7
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-5"
+            },
+            {
+              "key": "key-1",
+              "value": "value-6"
+            },
+            {
+              "key": "key-2",
+              "value": "value-2"
+            },
+            {
+              "key": "key-3",
+              "value": "value-1"
+            },
+            {
+              "key": "key-4",
+              "value": "value-4"
+            }
+          ],
+          "known": 25
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-4"
+            },
+            {
+              "key": "key-1",
+              "value": "value-5"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 80
+        },
+        {
+          "facts": [
+            {
+              "key": "key-0",
+              "value": "value-6"
+            },
+            {
+              "key": "key-1",
+              "value": "value-0"
+            },
+            {
+              "key": "key-2",
+              "value": "value-1"
+            },
+            {
+              "key": "key-3",
+              "value": "value-2"
+            },
+            {
+              "key": "key-4",
+              "value": "value-3"
+            }
+          ],
+          "known": 200
+        }
+      ]
+    }
+  ],
+  "reference": "bitemporal-runtime",
+  "snapshotBoundary": {
+    "freeFunctionCount": 0,
+    "inMemoryCount": 1
+  },
+  "version": "0.1.0"
+}
