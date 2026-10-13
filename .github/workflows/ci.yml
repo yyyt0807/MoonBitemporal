@@ -41,5 +41,11 @@ jobs:
         run: moon run examples/rollout --target wasm-gc
       - name: Atomic pages and joint coverage example
         run: moon run examples/maintenance --target wasm-gc
+      - name: Supersession evidence example
+        run: moon run examples/correction_evidence --target wasm-gc
+      - name: Invoice decision review example
+        run: moon run examples/decision_review --target wasm-gc
+      - name: Access decision review example
+        run: moon run examples/access_review --target wasm-gc
       - name: Native workload smoke check
         run: moon run benchmarks/main --target native --release

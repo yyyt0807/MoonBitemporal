@@ -20,3 +20,11 @@ The point-query worst case occurs when many later revisions for the same key hav
 For the scale reference in the October charter, this repository has more than 4,000 nonempty, noncomment MoonBit lines, including tests and runnable examples. This is a project size indicator, not a speed claim. The generated-history differential tests compare optimized queries against an independent forward-scan model. A fixed native release workload and one local timing record are in [benchmark evidence](BENCHMARK.md); they do not establish general throughput. Future benchmarks should vary key count, overlap density, batch size, checkpoint frequency and archive length on stated hardware.
 
 Potential future optimization: persist per-key interval search structures for very large, overlap-heavy histories. That would improve worst-case point lookup but increase update cost and memory, complicate immutable snapshots and add another consistency invariant. Implement it only after workload measurements show the backward scan is a practical bottleneck.
+
+## 0.2.0 operations
+
+For h revisions of the selected key and S emitted fragments, supersession_fragments uses the existing heap sweep in O(h log(h+1)) time and O(h+S) auxiliary space. It avoids the O(h squared) behavior of querying the old winner separately at every boundary; strict knowledge eligibility avoids subtracting one from Int64 minimum. max_fragments caps output, not the temporary history scan; the global revision budget still controls input scale.
+
+For Q captured decisions and per-decision key history h_i, audit_decisions takes O(Q + sum(log(h_i+1)+h_i)) expected time and O(Q) extra space, plus claim-string comparison costs. It queries each original fact for consistency, then the review fact; no full ledger snapshot is copied per decision. Large overlap-heavy histories remain a backward-scan bottleneck. A full interval index would add memory and update invariants; defer it until measurements justify the cost. No superiority over Rust throughput is claimed.
+
+keys() now iterates the existing unique-key index, reducing enumeration from O(N log N) time and O(N) scratch space to O(K log K) and O(K), where K is unique keys. Snapshot outputs and lexical ordering remain unchanged.

@@ -11,6 +11,10 @@ moon run examples/pricing --target wasm-gc
 moon run examples/access --target wasm-gc
 moon run examples/calibration --target wasm-gc
 moon run examples/rollout --target wasm-gc
+moon run examples/maintenance --target wasm-gc
+moon run examples/decision_review --target wasm-gc
+moon run examples/access_review --target wasm-gc
+moon run examples/correction_evidence --target wasm-gc
 ```
 
 The GitHub Actions workflow is configured to run these checks on Ubuntu and Windows after push. Local success does not prove a remote CI run passed; verify the public default branch and its latest run after push.
@@ -20,3 +24,7 @@ Tests cover normal assignment, retroactive correction, withdrawal, adjacent and 
 The runnable examples serve as integration checks: pricing reproduces an old invoice; access distinguishes what an incident-time system knew from later policy correction; calibration aligns metadata changes; rollout compares a candidate rule history against a deployed one and rejects a divergent sibling branch. Their assertions must pass, not merely their process startup.
 
 Stress-oriented cases include a 1,000-change disjoint batch, hundreds of sequential archive batches, long builder ingestion and generated overlap histories. These are correctness workloads rather than benchmark results. The library limits input size, revision count, segment count, key count and sampled matrix cells; callers can set tighter budgets for untrusted workloads. No network service or concurrent writer exists in the core, so remote throughput and race properties require adapter-specific testing.
+
+## 0.2.0 validation
+
+107 test groups per backend: 85 existing groups, 19 handwritten evidence/review groups, and 3 generated Rust-reference groups. Reference groups cover 144 point queries and 21 snapshots. Supersession tests compare each covered point with an independent strict forward scan; decision tests include 2,000 captured business records, foreign claims with the same sequence, duplicate IDs, reversed knowledge times, gaps/tombstones, budget errors and Int64 extremes. Rust generation is independently executed by reference-vectors.yml with a locked dependency graph; ordinary moon tests need no Rust toolchain.

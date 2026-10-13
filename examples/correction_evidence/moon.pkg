@@ -1,0 +1,5 @@
+import {
+  "yyyt0807/moonbitemporal" @temporal,
+}
+
+pkgtype(kind: "executable")

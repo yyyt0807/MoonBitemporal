@@ -7,7 +7,7 @@ Package namespace: `yyyt0807/moonbitemporal`. Repository: [yyyt0807/MoonBitempor
 ## Install as a dependency
 
 ```sh
-moon add yyyt0807/moonbitemporal@0.1.0
+moon add yyyt0807/moonbitemporal@0.2.0
 ```
 
 Import the library in the consuming package's `moon.pkg`:
@@ -25,7 +25,18 @@ Pricing, access rules, reference data, calibration metadata and configuration al
 
 The core models both business-valid time and knowledge time; interval indexing, calendar arithmetic and application-specific policy decisions remain separate integration concerns.
 
-## Core behavior
+## Reference comparison and implemented scope
+
+See the [feature matrix against Rust bitemporal-runtime 0.1.0](docs/REFERENCE_COMPARISON.md) for implemented capabilities, semantic differences and explicit exclusions. Shared open-span point/snapshot semantics are checked against actual outputs from the pinned Rust crate. This is an original MoonBit implementation with finite valid intervals, tombstones, atomic batches and portable archive support; it does not include Rust's SQLite adapter, generic payload API or cryptographic receipts. The upstream is MIT OR Apache-2.0; reference scope and fixture provenance are recorded in [third-party notices](THIRD_PARTY_NOTICES.md).
+
+### New in 0.2.0
+
+- `supersession_fragments(index, max_fragments~)` partitions a revision's entire valid span by its immediately prior winners, including gaps, tombstones and same-value reassertions. JSON carries complete source/replacement claim content. It is structural evidence without a digest or signature.
+- `capture_decision(id,key,valid_at,known_at)` records the fact used by a business operation. `audit_decisions(decisions,review_known,max_decisions~)` validates the original evidence and returns results in request order. `needs_recompute` detects fact-state changes; `provenance_changed` also detects same-value source changes. Business rules remain in the caller.
+
+The [three complete scenarios](docs/SCENARIOS.md) demonstrate invoice adjustment, access review and calibration correction evidence with executable assertions.
+
+### Established core behavior
 
 - `Span::new(start, end)` is half-open `[start, end)`; `Span::open(start)` has no right bound. Adjacent spans do not overlap.
 - A `Change` assigns an opaque string or a tombstone to one key over a valid-time span. Keys are case-sensitive and nonempty.
@@ -74,6 +85,10 @@ moon run examples/pricing --target wasm-gc
 moon run examples/access --target wasm-gc
 moon run examples/calibration --target wasm-gc
 moon run examples/rollout --target wasm-gc
+moon run examples/maintenance --target wasm-gc
+moon run examples/decision_review --target wasm-gc
+moon run examples/access_review --target wasm-gc
+moon run examples/correction_evidence --target wasm-gc
 moon run benchmarks/main --target native --release
 ```
 
@@ -85,10 +100,10 @@ This library stores full revision history in memory and performs string-value co
 
 ## Project status and license
 
-The implementation is original and AI-assisted, not a port or copy of an upstream library. The implementation uses the standard concepts of valid time and system time; no third-party runtime package or copied test corpus is used. Source code is licensed under [Apache-2.0](LICENSE).
+The implementation is original and AI-assisted, not a port or copy of an upstream library. The implementation uses standard valid-time and knowledge-time concepts. The optional Rust validation tool executes the pinned bitemporal-runtime crate; the MoonBit runtime has no Rust dependency and no copied upstream test corpus. Source and generated fixture provenance are documented in [third-party notices](THIRD_PARTY_NOTICES.md). Source code is licensed under [Apache-2.0](LICENSE).
 
 ## 十月第二轮：完整批次分页与多键联合覆盖
 
-`Ledger::batches_since(None, max_batches?, max_revisions?)` 从账本起点读取完整原子批次；传 `Some(known_at)` 则严格读取该游标之后的批次。结果的 `next_known_at()` 可继续请求，`has_more()` 区分结束；首批超过修订预算会报错，避免不前进的空页。空游标能包含 Int64 最小时间戳，无须做游标加一。
+`Ledger::batches_since(None, max_batches~, max_revisions~)` 从账本起点读取完整原子批次；传 `Some(known_at)` 则严格读取该游标之后的批次。结果的 `next_known_at()` 可继续请求，`has_more()` 区分结束；首批超过修订预算会报错，避免不前进的空页。空游标能包含 Int64 最小时间戳，无须做游标加一。
 
-`joint_assigned_spans(keys, bounds, known_at, max_keys?, max_segments?)` 返回全部指定键同时有值的最大有效区间；不比较值、不执行授权规则，空键集返回整个 bounds。查询键先以有界集合去重再排序，重复键不占额外唯一键预算。运行 `moon run examples/maintenance --target wasm-gc`。详见 [功能与边界](docs/OCTOBER_FEATURES.md)。
+`joint_assigned_spans(keys, bounds, known_at, max_keys~, max_segments~)` 返回全部指定键同时有值的最大有效区间；不比较值、不执行授权规则，空键集返回整个 bounds。查询键先以有界集合去重再排序，重复键不占额外唯一键预算。运行 `moon run examples/maintenance --target wasm-gc`。详见 [功能与边界](docs/OCTOBER_FEATURES.md)。

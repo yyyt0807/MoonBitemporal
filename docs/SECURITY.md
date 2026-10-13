@@ -10,3 +10,7 @@ MoonBitemporal is an in-memory semantic core. It does not authenticate a writer,
 - **Time semantics:** The library has no timezone or calendar understanding. Translate to a consistent integral unit before submission, and document how daylight-saving changes and leap seconds are handled in the adapter.
 
 Report a suspected correctness or security issue through the repository's issue tracker after the public repository is created. Until then, keep sensitive example data out of commits.
+
+## Structural correction and decision evidence
+
+Supersession and decision evidence have no cryptographic hash or signature. Sequence identifiers are archive-local. Original decision verification checks only the queried winning claims, not the entire history or actor identity. Use trusted archives, authenticated transport and application-level authorization. JSON exports can contain sensitive keys/values and must follow the caller data policy. Decision evidence is currently in memory; the export is a report rather than an importable decision archive.

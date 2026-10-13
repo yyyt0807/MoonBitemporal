@@ -1,0 +1,6 @@
+import {
+  "yyyt0807/moonbitemporal" @temporal,
+  "moonbitlang/core/string",
+}
+
+pkgtype(kind: "executable")
